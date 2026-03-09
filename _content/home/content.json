@@ -1,0 +1,136 @@
+{
+  "hero": {
+    "title": "Jesteśmy Steel Bros. Tworzymy z pasją. Budujemy ze stali.",
+    "lead": "",
+    "ctaPrimary": "",
+    "ctaSecondary": ""
+  },
+  "trustBar": {
+    "items": [
+      {
+        "label": "Cięcie"
+      },
+      {
+        "label": "Laser"
+      },
+      {
+        "label": "Gięcie"
+      },
+      {
+        "label": "Spawanie"
+      },
+      {
+        "label": "Szlifowanie"
+      }
+    ]
+  },
+  "whySteelBros": {
+    "title": "Twój projekt w dobrych rękach",
+    "pillars": [
+      {
+        "title": "Gwarancja",
+        "description": "Na każdą naszą realizację dajemy solidną gwarancję jakości."
+      },
+      {
+        "title": "Ubezpieczenie",
+        "description": "Pełne ubezpieczenie OC na czas montażu u klienta."
+      },
+      {
+        "title": "Indywidualne podejście",
+        "description": "Każdy projekt dopasowujemy do Twoich wymiarów i potrzeb."
+      },
+      {
+        "title": "Projektowanie",
+        "description": "Precyzyjne projekty CAD – widzisz efekt przed rozpoczęciem prac."
+      },
+      {
+        "title": "Certyfikaty",
+        "description": "Zespół z uprawnieniami i certyfikatami spawalniczymi."
+      }
+    ]
+  },
+  "process": {
+    "title": "Od pomysłu do gotowej konstrukcji",
+    "steps": [
+      {
+        "title": "Pomiar i konsultacja"
+      },
+      {
+        "title": "Projektowanie 3D / CAD"
+      },
+      {
+        "title": "Własna produkcja (cięcie, laser, spawanie)"
+      },
+      {
+        "title": "Zabezpieczenie (malowanie proszkowe / cynkowanie)"
+      },
+      {
+        "title": "Bezpieczny montaż na miejscu"
+      }
+    ]
+  },
+  "offerB2c": {
+    "title": "Stwórzmy przestrzeń, o której marzysz",
+    "tiles": [
+      {
+        "title": "Pergole nowoczesne",
+        "description": "Nasz bestseller",
+        "href": "/pergole-nowoczesne"
+      },
+      {
+        "title": "Drzwi i ścianki loftowe",
+        "href": "/drzwi-scianki-loftowe"
+      },
+      {
+        "title": "Kuchnie ogrodowe",
+        "href": "/kuchnie-ogrodowe"
+      },
+      {
+        "title": "Campery i Off-road",
+        "href": "/campery-offroad"
+      }
+    ]
+  },
+  "offerB2b": {
+    "title": "Solidny partner dla Twojej firmy",
+    "tiles": [
+      {
+        "title": "Konstrukcje budowlane i hale",
+        "href": "/konstrukcje-budowlane"
+      },
+      {
+        "title": "Przemysł i BHP",
+        "href": "/przemysl-magazyn"
+      },
+      {
+        "title": "Mała architektura miejska",
+        "href": "/architektura-miejska"
+      }
+    ]
+  },
+  "portfolio": {
+    "title": "Ostatnie realizacje Steel Bros",
+    "items": [
+      {
+        "title": "[Realizacja 1]",
+        "excerpt": "[Krótki opis]",
+        "href": "/realizacje/przykladowa-realizacja"
+      },
+      {
+        "title": "[Realizacja 2]",
+        "excerpt": "[Krótki opis]",
+        "href": "/realizacje/przykladowa-realizacja"
+      },
+      {
+        "title": "[Realizacja 3]",
+        "excerpt": "[Krótki opis]",
+        "href": "/realizacje/przykladowa-realizacja"
+      }
+    ],
+    "ctaLabel": "Zobacz całe portfolio"
+  },
+  "contactSection": {
+    "title": "Gotowy na współpracę? Porozmawiajmy.",
+    "ctaLabel": "Kontakt"
+  }
+}

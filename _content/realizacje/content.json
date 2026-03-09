@@ -1,0 +1,7 @@
+{
+  "title": "Realizacje",
+  "lead": "lead.md",
+  "items": [
+    { "slug": "przykladowa-realizacja", "title": "Przykładowa realizacja", "excerpt": "[Krótki opis realizacji]" }
+  ]
+}

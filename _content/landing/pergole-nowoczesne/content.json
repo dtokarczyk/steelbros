@@ -1,0 +1,64 @@
+{
+  "hero": {
+    "title": "Pergole nowoczesne na wymiar. Stwórz unikalny klimat w swoim domu.",
+    "lead": "hero-lead.md",
+    "ctaLabel": "Zamów Bezpłatną Wycenę",
+    "trustItems": [
+      { "label": "Gwarancja Jakości" },
+      { "label": "Ubezpieczenie Montażu" },
+      { "label": "Projektowanie CAD" },
+      { "label": "Własna Produkcja" }
+    ]
+  },
+  "emotions": {
+    "title": "Szukasz pergoli, która przetrwa lata i zachwyci designem?",
+    "body": "benefits-intro.md",
+    "benefits": [
+      { "text": "Wytrzymałość na lata: certyfikowana stal (ocynk + malowanie proszkowe)." },
+      { "text": "Idealne dopasowanie: zero gotowców, każdy milimetr pod Twoją przestrzeń." },
+      { "text": "Unikalny design: stal z nowoczesną estetyką (szkło, corten, drewno)." }
+    ]
+  },
+  "whySteelBros": {
+    "title": "Twój projekt, nasza odpowiedzialność. Proces End-to-End.",
+    "items": [
+      { "title": "Projektowanie CAD", "description": "Zobaczysz pergolę na ekranie, zanim dotkniemy stali." },
+      { "title": "Certyfikaty i precyzja", "description": "Park maszynowy i uprawnienia – gwarancja bezpieczeństwa." },
+      { "title": "Indywidualne podejście", "description": "Nietypowy pomysł? Dla nas to żaden problem." },
+      { "title": "Gwarancja i spokój", "description": "Pełna gwarancja na konstrukcję i montaż." }
+    ]
+  },
+  "variants": {
+    "title": "Dopasuj pergolę do swojego stylu",
+    "options": [
+      { "title": "Kolorystyka", "description": "Dowolny kolor z palety RAL." },
+      { "title": "Wykończenie", "description": "Mat, połysk, struktura, naturalna rdza (corten)." },
+      { "title": "Dodatki", "description": "Rolety, oświetlenie LED." }
+    ]
+  },
+  "socialProof": {
+    "title": "Zobacz, jak pergole odmieniły przestrzenie naszych klientów",
+    "testimonial": { "quote": "Panowie ze Steel Bros zrobili świetną robotę. Montaż był szybki i czysty. Polecam!", "author": "Klient z Śląska" }
+  },
+  "process": {
+    "title": "4 proste kroki do Twojej nowej pergoli",
+    "steps": [
+      { "title": "Kontakt i darmowa wycena" },
+      { "title": "Pomiar i projekt CAD" },
+      { "title": "Produkcja w warsztacie" },
+      { "title": "Szybki i czysty montaż" }
+    ]
+  },
+  "faq": {
+    "title": "Masz pytania? Mamy odpowiedzi.",
+    "items": [
+      { "question": "Ile kosztuje pergola nowoczesna?", "answer": "faq-1.md" },
+      { "question": "Jak długo trwa realizacja?", "answer": "faq-2.md" }
+    ]
+  },
+  "conversion": {
+    "title": "Zacznijmy projektować Twoją pergolę",
+    "body": "conversion-intro.md",
+    "formTitle": "Formularz wyceny"
+  }
+}
