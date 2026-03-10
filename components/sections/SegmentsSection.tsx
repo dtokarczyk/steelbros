@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import React, { useRef, useEffect } from "react";
+import { useSpring, animated } from "@react-spring/web";
 
 const segments = [
   {
@@ -31,31 +33,105 @@ const segments = [
   },
 ];
 
-const SegmentsSection = () => {
+const SegmentButton = ({ reverse = false }: { reverse?: boolean }) => (
+  <button
+    type="button"
+    className={`mt-4 inline-flex items-center justify-center border border-transparent bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-black [font-variant:small-caps] transition-colors duration-200 hover:bg-primary hover:text-white ${reverse ? "self-end" : "self-start"}`}
+  >
+    pokaż więcej
+  </button>
+);
+
+/** Maps scroll position to a 0–1 progress value for a given element. */
+function getScrollProgress(el: HTMLElement): number {
+  const rect = el.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
+  // Start animating when the element bottom crosses the viewport bottom,
+  // finish when the element top reaches 30% from the viewport top.
+  const start = windowHeight;
+  const end = rect.height * 0.3;
+  const raw = (start - rect.top) / (start - end);
+  return Math.min(Math.max(raw, 0), 1);
+}
+
+const SegmentCard = ({
+  title,
+  subtitle,
+  reverse = false,
+}: {
+  title: string;
+  subtitle: string;
+  reverse?: boolean;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [springs, api] = useSpring(() => ({
+    from: { opacity: 0, y: 60 },
+    config: { mass: 1, tension: 160, friction: 28 },
+  }));
+
+  useEffect(() => {
+    const update = () => {
+      if (!ref.current) return;
+      const progress = getScrollProgress(ref.current);
+      api.start({
+        opacity: progress,
+        y: (1 - progress) * 60,
+        immediate: false,
+      });
+    };
+
+    window.addEventListener("scroll", update, { passive: true });
+    // Run once on mount to handle elements already in view
+    update();
+    return () => window.removeEventListener("scroll", update);
+  }, [api]);
+
   return (
-    <section className="relative z-10 py-12 md:py-16 lg:py-20">
+    <animated.div
+      ref={ref}
+      style={springs}
+      className={`flex w-full items-center gap-8 ${reverse ? "flex-row-reverse" : "flex-row"}`}
+    >
+      {/* Image placeholder — 3:4 ratio */}
+      <div className="aspect-[3/4] w-1/2 shrink-0 overflow-hidden rounded-md bg-white/10">
+        <div className="flex h-full w-full items-center justify-center">
+          <svg className="h-8 w-8 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        </div>
+      </div>
+      {/* Text */}
+      <div className={`flex flex-col justify-center gap-2 ${reverse ? "items-end text-right" : "items-start text-left"}`}>
+        <h2 className="mb-1 text-3xl font-bold text-foreground">{title}</h2>
+        <p className="text-base text-body-color leading-snug">{subtitle}</p>
+        <SegmentButton reverse={reverse} />
+      </div>
+    </animated.div>
+  );
+};
+
+const SegmentsSection = () => {
+  const left = segments.slice(0, 3);
+  const right = segments.slice(3);
+
+  return (
+    <section className="relative z-10 py-16 md:py-20 lg:py-24">
       <div className="container">
-        <div className="-mx-4 flex flex-wrap">
-          {segments.map((segment) => (
-            <div
-              key={segment.title}
-              className="w-full px-4 md:w-1/2 lg:w-1/3 xl:w-1/4 mb-6"
-            >
-              <div
-                className="relative overflow-hidden rounded-md bg-dark/40 bg-cover bg-center"
-                style={{
-                  backgroundImage: "url('/images/about/about-image.svg')",
-                }}
-              >
-                <div className="relative z-10 flex min-h-[180px] flex-col justify-end bg-gradient-to-t from-background/90 via-background/40 to-transparent p-5">
-                  <h2 className="mb-1 text-lg font-semibold text-foreground">
-                    {segment.title}
-                  </h2>
-                  <p className="text-sm text-body-color">{segment.subtitle}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+        <div className="flex items-center justify-center gap-8">
+          {/* Left column — image on the right */}
+          <div className="flex flex-1 flex-col gap-8">
+            {left.map((s) => (
+              <SegmentCard key={s.title} {...s} reverse />
+            ))}
+          </div>
+
+          {/* Right column — image on the left */}
+          <div className="flex flex-1 flex-col gap-8">
+            {right.map((s) => (
+              <SegmentCard key={s.title} {...s} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -63,4 +139,3 @@ const SegmentsSection = () => {
 };
 
 export default SegmentsSection;
-
