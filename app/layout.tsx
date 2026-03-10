@@ -1,5 +1,4 @@
-import Header from "../components/Header";
-import "node_modules/react-modal-video/css/modal-video.css";
+import Menu from "../components/Menu";
 import "../styles/index.css";
 import { Providers } from "./providers";
 
@@ -13,8 +12,8 @@ export default function RootLayout({
       <head />
       <body className="dark:bg-black">
         <Providers>
-          <Header />
           {children}
+          <Menu />
         </Providers>
       </body>
     </html>

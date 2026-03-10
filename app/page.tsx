@@ -3,6 +3,9 @@ import {
   KeywordsSection,
   SegmentsSection,
   AboutSection,
+  CaseStudyCarousel,
+  TrustSection,
+  ProcessCircle,
 } from "@/components/sections";
 import { getHomeContent } from "@/lib/content";
 import { notFound } from "next/navigation";
@@ -19,6 +22,9 @@ export default function HomePage() {
       <KeywordsSection />
       <AboutSection />
       <SegmentsSection />
+      <ProcessCircle />
+      <TrustSection />
+      <CaseStudyCarousel />
     </>
   );
 }
