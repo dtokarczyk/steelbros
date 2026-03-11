@@ -5,3 +5,4 @@ export { default as AboutSection } from "./AboutSection";
 export { default as CaseStudyCarousel } from "./CaseStudyCarousel";
 export { default as TrustSection } from "./TrustSection";
 export { default as ProcessCircle } from "./ProcessCircle";
+export { default as ServicesHero } from "./ServicesHero";

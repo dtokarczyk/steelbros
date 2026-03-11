@@ -2,6 +2,7 @@
 import React, { useRef, useEffect } from "react";
 import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
+import Button from "../Button";
 
 const segments = [
   {
@@ -33,15 +34,6 @@ const segments = [
     subtitle: "Cięcie, gięcie, spawanie i inne obróbki stali na zamówienie.",
   },
 ];
-
-const SegmentButton = ({ reverse = false }: { reverse?: boolean }) => (
-  <button
-    type="button"
-    className={`mt-4 inline-flex items-center justify-center border border-transparent bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-black [font-variant:small-caps] transition-colors duration-200 hover:bg-primary hover:text-white self-start ${reverse ? "md:self-end" : "md:self-start"}`}
-  >
-    pokaż więcej
-  </button>
-);
 
 /** Maps scroll position to a 0–1 progress value for a given element. */
 function getScrollProgress(el: HTMLElement): number {
@@ -106,7 +98,9 @@ const SegmentCard = ({
       <div className={`flex flex-col justify-center gap-2 items-start text-left ${reverse ? "md:items-end md:text-right" : "md:items-start md:text-left"}`}>
         <h2 className="mb-1 text-3xl text-foreground">{title}</h2>
         <p className="text-base text-body-color leading-snug">{subtitle}</p>
-        <SegmentButton reverse={reverse} />
+        <Button className={`mt-4 self-start ${reverse ? "md:self-end" : "md:self-start"}`}>
+          pokaż więcej
+        </Button>
       </div>
     </A.div>
   );
