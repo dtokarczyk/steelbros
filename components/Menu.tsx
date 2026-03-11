@@ -2,23 +2,8 @@
 
 import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
-import { useSpring, useTrail, animated, config } from "@react-spring/web";
-
-type AnimatedElProps = {
-  children?: React.ReactNode;
-  className?: string;
-  style?: Record<string, unknown>;
-  onClick?: () => void;
-};
-
-type AnimatedAProps = AnimatedElProps & {
-  href?: string;
-  "aria-label"?: string;
-};
-
-const AnimatedDiv = animated.div as unknown as React.FC<AnimatedElProps>;
-const AnimatedP = animated.p as unknown as React.FC<AnimatedElProps>;
-const AnimatedA = animated.a as unknown as React.FC<AnimatedAProps>;
+import { useSpring, useTrail, config } from "@react-spring/web";
+import { A } from "@/lib/animated";
 
 const NAV_ITEMS = [
   { label: "O nas", href: "#about" },
@@ -119,7 +104,7 @@ export default function Menu() {
         className="fixed top-0 inset-x-0 z-50 px-4 pt-4 md:pt-5"
       >
         <div className="flex items-center gap-3 md:w-fit md:mx-auto">
-          <AnimatedDiv
+          <A.div
             style={{ opacity: barSpring.opacity }}
             className="flex flex-1 md:flex-initial items-center justify-between md:justify-start gap-6 bg-black/80 backdrop-blur-md border border-white/10 px-5 py-3 shadow-lg shadow-black/30"
           >
@@ -141,9 +126,9 @@ export default function Menu() {
             >
               Menu
             </button>
-          </AnimatedDiv>
+          </A.div>
 
-          <AnimatedA
+          <A.a
             href="tel:+48123456789"
             style={{ opacity: barSpring.opacity }}
             className="flex items-center justify-center w-[46px] h-[46px] bg-primary/80 backdrop-blur-md text-black shadow-lg shadow-black/30 hover:bg-primary/90 transition-colors duration-200"
@@ -161,12 +146,12 @@ export default function Menu() {
             >
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
             </svg>
-          </AnimatedA>
+          </A.a>
         </div>
       </div>
 
       {/* Overlay backdrop */}
-      <AnimatedDiv
+      <A.div
         style={{
           opacity: backdropSpring.opacity,
           pointerEvents: open ? "auto" : "none",
@@ -176,13 +161,13 @@ export default function Menu() {
       />
 
       {/* Menu panel — expands from top bar */}
-      <AnimatedDiv
+      <A.div
         style={{
           pointerEvents: open ? "auto" : "none",
         }}
         className="fixed inset-x-0 top-0 z-[70] flex flex-col items-center"
       >
-        <AnimatedDiv
+        <A.div
           style={{
             opacity: panelSpring.opacity,
             clipPath: panelSpring.clipPath,
@@ -191,21 +176,21 @@ export default function Menu() {
         >
           <div className="px-8 pt-10 pb-8">
             {/* Menu label */}
-            <AnimatedP
+            <A.p
               style={{
                 opacity: navTrail[0]?.opacity ?? 0,
               }}
               className="text-[11px] font-medium uppercase tracking-[0.3em] text-white/40 mb-8"
             >
               Menu
-            </AnimatedP>
+            </A.p>
 
             {/* Primary nav */}
             <nav className="mb-8">
               <ul className="space-y-1">
                 {navTrail.map((style, i) => (
                   <li key={NAV_ITEMS[i].label}>
-                    <AnimatedDiv
+                    <A.div
                       style={{
                         opacity: style.opacity,
                         transform: style.y.to(
@@ -224,7 +209,7 @@ export default function Menu() {
                       >
                         {NAV_ITEMS[i].label}
                       </Link>
-                    </AnimatedDiv>
+                    </A.div>
                   </li>
                 ))}
               </ul>
@@ -234,7 +219,7 @@ export default function Menu() {
             <div className="flex gap-12 mb-8">
               <div>
                 {secondaryTrail.map((style, i) => (
-                  <AnimatedDiv
+                  <A.div
                     key={SECONDARY_ITEMS[i].label}
                     style={{
                       opacity: style.opacity,
@@ -250,11 +235,11 @@ export default function Menu() {
                     >
                       {SECONDARY_ITEMS[i].label}
                     </Link>
-                  </AnimatedDiv>
+                  </A.div>
                 ))}
               </div>
 
-              <AnimatedDiv
+              <A.div
                 style={{
                   opacity: contactSpring.opacity,
                   transform: contactSpring.y.to(
@@ -275,11 +260,11 @@ export default function Menu() {
                 >
                   kontakt@steelbros.pl
                 </a>
-              </AnimatedDiv>
+              </A.div>
             </div>
 
             {/* CTA */}
-            <AnimatedDiv
+            <A.div
               style={{
                 opacity: ctaSpring.opacity,
                 transform: ctaSpring.y.to((v) => `translateY(${v}px)`),
@@ -306,12 +291,12 @@ export default function Menu() {
                 </svg>
                 Zapytaj o wycenę
               </Link>
-            </AnimatedDiv>
+            </A.div>
           </div>
-        </AnimatedDiv>
+        </A.div>
 
         {/* Close button — below the panel */}
-        <AnimatedDiv
+        <A.div
           style={{
             opacity: closeSpring.opacity,
             transform: closeSpring.rotate.to(
@@ -340,8 +325,8 @@ export default function Menu() {
               <path d="m6 6 12 12" />
             </svg>
           </button>
-        </AnimatedDiv>
-      </AnimatedDiv>
+        </A.div>
+      </A.div>
     </>
   );
 }

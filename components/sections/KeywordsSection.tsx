@@ -1,19 +1,8 @@
 "use client";
 
-import type React from "react";
-import { animated, useSpring } from "@react-spring/web";
+import { useSpring } from "@react-spring/web";
 import { useEffect, useRef, useState } from "react";
-
-type AnimatedDivProps = {
-  children?: React.ReactNode;
-  className?: string;
-  style?: Record<string, unknown>;
-  ref?: React.RefObject<HTMLDivElement>;
-};
-
-const AnimatedDiv = animated.div as unknown as React.ForwardRefExoticComponent<
-  AnimatedDivProps & React.RefAttributes<HTMLDivElement>
->;
+import { A } from "@/lib/animated";
 
 const keywordsRowOne = [
   "Pergole",
@@ -97,7 +86,7 @@ const KeywordsStrip = ({
 
   return (
     <div className="border-y border-white/10 bg-background/80 py-4 text-foreground backdrop-blur-sm overflow-hidden">
-      <AnimatedDiv
+      <A.div
         className="flex will-change-transform"
         style={{ x }}
         ref={trackRef}
@@ -115,7 +104,7 @@ const KeywordsStrip = ({
             ))}
           </div>
         ))}
-      </AnimatedDiv>
+      </A.div>
     </div>
   );
 };

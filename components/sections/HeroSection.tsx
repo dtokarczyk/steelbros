@@ -1,18 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { animated, useSpring, useTrail } from "@react-spring/web";
-
-type AnimatedComponentProps = {
-  children?: React.ReactNode;
-  className?: string;
-  style?: Record<string, unknown>;
-  "aria-hidden"?: boolean | "true" | "false";
-};
-
-const AnimatedDiv = animated.div as unknown as React.FC<AnimatedComponentProps>;
-const AnimatedP = animated.p as unknown as React.FC<AnimatedComponentProps>;
-const AnimatedSpan = animated.span as unknown as React.FC<AnimatedComponentProps>;
+import { useSpring, useTrail } from "@react-spring/web";
+import { A } from "@/lib/animated";
 
 interface HeroSectionProps {
   title: string;
@@ -91,7 +81,7 @@ export default function HeroSection({ title, lead }: HeroSectionProps) {
       className="relative overflow-hidden min-h-[90vh] flex items-center"
     >
       {/* Background image with fade + subtle scale */}
-      <AnimatedDiv
+      <A.div
         aria-hidden
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -103,7 +93,7 @@ export default function HeroSection({ title, lead }: HeroSectionProps) {
       />
 
       {/* Dark overlay */}
-      <AnimatedDiv
+      <A.div
         className="absolute inset-0 bg-background/65"
         style={{ opacity: overlaySpring.opacity }}
       />
@@ -116,12 +106,12 @@ export default function HeroSection({ title, lead }: HeroSectionProps) {
         <div className="max-w-5xl mx-auto py-[180px] text-center">
 
           {/* Label */}
-          <AnimatedP
+          <A.p
             style={labelSpring}
             className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-white/60 [font-variant:small-caps]"
           >
             Małe konstrukcje stalowe
-          </AnimatedP>
+          </A.p>
 
           {/* Title */}
           <h1
@@ -130,21 +120,21 @@ export default function HeroSection({ title, lead }: HeroSectionProps) {
           >
             {trail.map((style, i) => (
               <React.Fragment key={i}>
-                <AnimatedSpan style={style} className="inline-block">
+                <A.span style={style} className="inline-block">
                   {words[i]}
-                </AnimatedSpan>
+                </A.span>
                 {i < words.length - 1 && " "}
               </React.Fragment>
             ))}
           </h1>
 
           {lead && (
-            <AnimatedP
+            <A.p
               style={leadSpring}
               className="mx-auto max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg"
             >
               {lead}
-            </AnimatedP>
+            </A.p>
           )}
 
         </div>

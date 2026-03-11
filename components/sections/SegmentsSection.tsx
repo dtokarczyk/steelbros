@@ -1,10 +1,7 @@
 "use client";
-import React, { useRef, useEffect, type ComponentPropsWithRef } from "react";
-import { useSpring, animated } from "@react-spring/web";
-
-const AnimatedDiv = animated.div as unknown as React.FC<
-  Omit<ComponentPropsWithRef<"div">, "style"> & { style?: Record<string, unknown> }
->;
+import React, { useRef, useEffect } from "react";
+import { useSpring } from "@react-spring/web";
+import { A } from "@/lib/animated";
 
 const segments = [
   {
@@ -92,7 +89,7 @@ const SegmentCard = ({
   }, [api]);
 
   return (
-    <AnimatedDiv
+    <A.div
       ref={ref}
       style={springs}
       className={`flex w-full items-center gap-6 md:gap-8 flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}
@@ -111,7 +108,7 @@ const SegmentCard = ({
         <p className="text-base text-body-color leading-snug">{subtitle}</p>
         <SegmentButton reverse={reverse} />
       </div>
-    </AnimatedDiv>
+    </A.div>
   );
 };
 

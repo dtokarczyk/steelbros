@@ -1,13 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { animated, useSprings } from "@react-spring/web";
-
-const AnimatedSpan = animated.span as unknown as React.FC<{
-  children?: React.ReactNode;
-  className?: string;
-  style?: Record<string, unknown>;
-}>;
+import { useSprings } from "@react-spring/web";
+import { A } from "@/lib/animated";
 
 const text =
   "Rodzinny duet i surowa stal. Pracujesz z nami bezpośrednio - od pierwszego projektu po końcowy montaż. Kształtujemy materiał w solidne i piękne konstrukcje, które dopełniają przestrzenie prywatne i biznesowe.";
@@ -65,9 +60,9 @@ const AboutSection = () => {
           >
             {springs.map((style, i) => (
               <React.Fragment key={i}>
-                <AnimatedSpan className="inline-block" style={style}>
+                <A.span className="inline-block" style={style}>
                   {words[i]}
-                </AnimatedSpan>
+                </A.span>
                 {i < words.length - 1 && " "}
               </React.Fragment>
             ))}

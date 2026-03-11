@@ -4,19 +4,9 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, A11y } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring } from "@react-spring/web";
+import { A } from "@/lib/animated";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-type AnimatedElProps = {
-  children?: React.ReactNode;
-  className?: string;
-  style?: Record<string, unknown>;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-};
-
-const AnimatedDiv = animated.div as unknown as React.FC<AnimatedElProps>;
-const AnimatedP = animated.p as unknown as React.FC<AnimatedElProps>;
 import {
   faShieldHalved,
   faUmbrella,
@@ -105,7 +95,7 @@ const TrustCard = ({
   });
 
   return (
-    <AnimatedDiv
+    <A.div
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
       style={{
@@ -115,7 +105,7 @@ const TrustCard = ({
       className="relative overflow-hidden flex min-h-[320px] cursor-pointer items-center justify-center rounded-2xl border border-white/20 p-6 transition-shadow duration-300 md:min-h-[380px]"
     >
       {/* Large background icon + label on hover */}
-      <AnimatedDiv
+      <A.div
         style={{
           opacity: backgroundIconSpring.opacity,
           transform: backgroundIconSpring.scale.to((v) => `scale(${v})`),
@@ -129,10 +119,10 @@ const TrustCard = ({
         <p className="text-xs uppercase tracking-[0.35em] text-black/15">
           {item.title}
         </p>
-      </AnimatedDiv>
+      </A.div>
 
       {/* Icon and short title at the top */}
-      <AnimatedDiv
+      <A.div
         style={{
           opacity: headerSpring.opacity,
           transform: headerSpring.y.to((v) => `translateY(${v}px)`),
@@ -154,11 +144,11 @@ const TrustCard = ({
         >
           {item.title}
         </p>
-      </AnimatedDiv>
+      </A.div>
 
       {/* Description centered in the card on hover */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <AnimatedP
+        <A.p
           style={{
             opacity: descriptionSpring.opacity,
             transform: descriptionSpring.y.to((v) => `translateY(${v}px)`),
@@ -166,9 +156,9 @@ const TrustCard = ({
           className="max-w-[14rem] text-center text-sm leading-relaxed text-black/80 md:text-base"
         >
           {item.description}
-        </AnimatedP>
+        </A.p>
       </div>
-    </AnimatedDiv>
+    </A.div>
   );
 };
 
