@@ -4,6 +4,14 @@ import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { useSpring, useTrail, animated, config } from "@react-spring/web";
 
+type AnimatedDivProps = {
+  children?: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties & Record<string, unknown>;
+};
+
+const AnimatedDiv = animated.div as unknown as React.FC<AnimatedDivProps>;
+
 const NAV_ITEMS = [
   { label: "O nas", href: "#about" },
   { label: "Oferta", href: "#segments" },
@@ -103,7 +111,7 @@ export default function Menu() {
         className="fixed top-0 inset-x-0 z-50 px-4 pt-4 md:pt-5"
       >
         <div className="flex items-center gap-3 md:w-fit md:mx-auto">
-          <animated.div
+          <AnimatedDiv
             style={{ opacity: barSpring.opacity }}
             className="flex flex-1 md:flex-initial items-center justify-between md:justify-start gap-6 bg-black/80 backdrop-blur-md border border-white/10 px-5 py-3 shadow-lg shadow-black/30"
           >
@@ -125,7 +133,7 @@ export default function Menu() {
             >
               Menu
             </button>
-          </animated.div>
+          </AnimatedDiv>
 
           <animated.a
             href="tel:+48123456789"
