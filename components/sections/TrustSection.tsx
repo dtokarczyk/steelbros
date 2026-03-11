@@ -1,6 +1,9 @@
-"use client";
+ "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, A11y } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 import { useSpring, animated } from "@react-spring/web";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,6 +14,8 @@ import {
   faCompassDrafting,
 } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import "swiper/css";
+import "swiper/css/pagination";
 
 interface TrustItem {
   icon: IconDefinition;
@@ -64,15 +69,28 @@ const TrustCard = ({
 }) => {
   const spring = useSpring({
     flex: isActive ? 2.4 : 1,
-    background: isActive ? "rgba(255,255,255,1)" : "rgba(255,255,255,0)",
+    background: isActive ? "var(--color-primary)" : "rgba(255,255,255,0)",
     config: { mass: 1, tension: 200, friction: 26 },
   });
 
-  const contentSpring = useSpring({
+  const headerSpring = useSpring({
+    opacity: isActive ? 0 : 1,
+    y: isActive ? -16 : 0,
+    config: { mass: 1, tension: 200, friction: 22 },
+  });
+
+  const descriptionSpring = useSpring({
     opacity: isActive ? 1 : 0,
-    y: isActive ? 0 : 12,
-    delay: isActive ? 150 : 0,
-    config: { mass: 1, tension: 200, friction: 26 },
+    y: isActive ? 0 : 16,
+    delay: isActive ? 80 : 0,
+    config: { mass: 1, tension: 210, friction: 24 },
+  });
+
+  const backgroundIconSpring = useSpring({
+    opacity: isActive ? 0.35 : 0,
+    scale: isActive ? 1 : 0.9,
+    delay: isActive ? 160 : 0,
+    config: { mass: 1, tension: 180, friction: 22 },
   });
 
   return (
@@ -83,36 +101,58 @@ const TrustCard = ({
         flex: spring.flex,
         backgroundColor: spring.background,
       }}
-      className="relative flex min-h-[320px] cursor-pointer flex-col justify-between rounded-2xl border border-white/20 p-6 transition-shadow duration-300 md:min-h-[380px]"
+      className="relative overflow-hidden flex min-h-[320px] cursor-pointer items-center justify-center rounded-2xl border border-white/20 p-6 transition-shadow duration-300 md:min-h-[380px]"
     >
-      <div
-        className={`flex h-12 w-12 items-center justify-center rounded-xl transition-colors duration-300 ${
-          isActive ? "bg-black/10" : "bg-white/10"
-        }`}
+      {/* Large background icon + label on hover */}
+      <animated.div
+        style={{
+          opacity: backgroundIconSpring.opacity,
+          transform: backgroundIconSpring.scale.to((v) => `scale(${v})`),
+        }}
+        className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center"
       >
         <FontAwesomeIcon
           icon={item.icon}
-          className={`text-xl transition-colors duration-300 ${
-            isActive ? "text-black" : "text-white"
-          }`}
+          className="mb-4 text-[120px] text-black/15"
         />
-      </div>
+        <p className="text-xs uppercase tracking-[0.35em] text-black/15">
+          {item.title}
+        </p>
+      </animated.div>
 
-      <div className="mt-auto">
-        <h3
-          className={`text-lg font-semibold leading-tight transition-colors duration-300 md:text-xl ${
-            isActive ? "text-black" : "text-white"
+      {/* Icon and short title at the top */}
+      <animated.div
+        style={{
+          opacity: headerSpring.opacity,
+          transform: headerSpring.y.to((v) => `translateY(${v}px)`),
+        }}
+        className="text-center"
+      >
+        <div className="mb-4 flex justify-center">
+          <FontAwesomeIcon
+            icon={item.icon}
+            className={`text-4xl transition-colors duration-300 ${
+              isActive ? "text-black" : "text-white"
+            }`}
+          />
+        </div>
+        <p
+          className={`text-xs font-light uppercase tracking-[0.25em] transition-colors duration-300 ${
+            isActive ? "text-black/70" : "text-white/70"
           }`}
         >
           {item.title}
-        </h3>
+        </p>
+      </animated.div>
 
+      {/* Description centered in the card on hover */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <animated.p
           style={{
-            opacity: contentSpring.opacity,
-            transform: contentSpring.y.to((v) => `translateY(${v}px)`),
+            opacity: descriptionSpring.opacity,
+            transform: descriptionSpring.y.to((v) => `translateY(${v}px)`),
           }}
-          className="mt-3 text-sm leading-relaxed text-black/70"
+          className="max-w-[14rem] text-center text-sm leading-relaxed text-black/80 md:text-base"
         >
           {item.description}
         </animated.p>
@@ -123,11 +163,13 @@ const TrustCard = ({
 
 const TrustSection = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const mobileSwiperRef = useRef<SwiperType | null>(null);
+  const total = items.length;
 
   return (
     <section
       aria-labelledby="trust-heading"
-      className="relative z-10 py-16 md:py-24 lg:py-28"
+      className="relative z-10 overflow-hidden py-16 md:py-24 lg:py-28"
     >
       <div className="container">
         <div className="mb-12 text-center md:mb-16">
@@ -137,11 +179,62 @@ const TrustSection = () => {
             style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
           >
             Pewność i{" "}
-            <em className="italic">bezpieczeństwo</em>.
+            <em className="italic text-primary">bezpieczeństwo</em>.
           </h2>
         </div>
+        {/* Mobile: swiper with single card */}
+        <div className="md:hidden">
+          <div className="relative -mx-4 px-4">
+            <Swiper
+              modules={[Pagination, A11y]}
+              slidesPerView={1.15}
+              spaceBetween={16}
+              centeredSlides={true}
+              pagination={false}
+              onSwiper={(swiper) => {
+                mobileSwiperRef.current = swiper;
+              }}
+              onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+              className="!overflow-visible"
+            >
+              {items.map((item) => (
+                <SwiperSlide key={item.title}>
+                  <div className="flex min-h-[260px] flex-col items-center justify-center rounded-none border border-white/20 bg-white/5 p-8 text-center">
+                    <FontAwesomeIcon
+                      icon={item.icon}
+                      className="mb-4 text-4xl text-primary"
+                    />
+                    <p className="mb-3 text-xs font-light uppercase tracking-[0.25em] text-white/80">
+                      {item.title}
+                    </p>
+                    <p className="text-sm leading-relaxed text-white/70">
+                      {item.description}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
+          {/* Mobile pagination bars - same style as case studies */}
+          <div className="mt-6 flex justify-center gap-2">
+            {Array.from({ length: total }).map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                aria-label={`Przejdź do elementu ${i + 1}`}
+                onClick={() => mobileSwiperRef.current?.slideTo(i)}
+                className={`block transition-all duration-300 ${
+                  i === activeIndex
+                    ? "h-[3px] w-6 bg-primary"
+                    : "h-[3px] w-3 bg-white/20 hover:bg-white/40"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
 
-        <div className="mx-auto flex max-w-6xl gap-3 md:gap-4">
+        {/* Desktop: interactive stretch cards */}
+        <div className="mx-auto hidden max-w-6xl gap-3 md:flex md:gap-4">
           {items.map((item, i) => (
             <TrustCard
               key={item.title}

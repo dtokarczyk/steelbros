@@ -62,18 +62,43 @@ const ImagePlaceholder = () => (
 
 export default function CaseStudyCarousel() {
   const swiperRef = useRef<SwiperType | null>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [parallaxY, setParallaxY] = useState(0);
   const total = realizacje.length;
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const el = sectionRef.current;
+      if (!el) return;
+      const { top, height } = el.getBoundingClientRect();
+      const viewH = window.innerHeight;
+      if (top > viewH || top + height < 0) return;
+      const progress = (viewH - top) / (viewH + height);
+      setParallaxY((progress - 0.5) * 250);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section className="relative overflow-hidden py-16 md:py-20 lg:py-24">
+    <section ref={sectionRef} className="relative overflow-hidden pt-16">
       <div className="container">
+        {/* Horizontal heading — mobile only */}
+        <h2 className="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/40 md:hidden">
+          Nasze realizacje
+        </h2>
+
         <div className="flex items-stretch gap-6 md:gap-10">
-          {/* Vertical label — beside the carousel */}
+          {/* Vertical label — parallax layer */}
           <div className="hidden shrink-0 items-center justify-center md:flex">
             <span
-              className="select-none text-[1.75rem] font-bold uppercase tracking-[0.2em] text-white/10 lg:text-[2.5rem] [writing-mode:vertical-rl]"
-              style={{ transform: "rotate(180deg)" }}
+              className="select-none text-[1.75rem] font-bold uppercase tracking-[0.2em] text-white/10 transition-transform duration-75 ease-out will-change-transform lg:text-[2.5rem] [writing-mode:vertical-rl]"
+              style={{
+                transform: `rotate(180deg) translateY(${parallaxY}px)`,
+              }}
             >
               Nasze realizacje
             </span>
@@ -114,10 +139,10 @@ export default function CaseStudyCarousel() {
                     </div>
 
                     {/* Caption */}
-                    <h3 className="mb-1 text-sm font-semibold uppercase tracking-[0.15em] text-foreground transition-colors duration-200 group-hover:text-primary">
+                    <h3 className="mb-1 text-2xl text-foreground transition-colors duration-200 group-hover:text-primary">
                       {item.title}
                     </h3>
-                    <p className="line-clamp-2 text-xs leading-relaxed text-body-color">
+                    <p className="line-clamp-2 text-base leading-relaxed text-body-color">
                       {item.description}
                     </p>
                   </Link>

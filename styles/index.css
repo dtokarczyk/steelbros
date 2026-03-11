@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #C09949;
+}
+
 @layer base {
   body {
     font-family: "Outfit", system-ui, -apple-system, BlinkMacSystemFont,

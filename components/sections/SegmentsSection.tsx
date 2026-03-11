@@ -1,6 +1,10 @@
 "use client";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, type ComponentPropsWithRef } from "react";
 import { useSpring, animated } from "@react-spring/web";
+
+const AnimatedDiv = animated.div as unknown as React.FC<
+  Omit<ComponentPropsWithRef<"div">, "style"> & { style?: Record<string, unknown> }
+>;
 
 const segments = [
   {
@@ -36,7 +40,7 @@ const segments = [
 const SegmentButton = ({ reverse = false }: { reverse?: boolean }) => (
   <button
     type="button"
-    className={`mt-4 inline-flex items-center justify-center border border-transparent bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-black [font-variant:small-caps] transition-colors duration-200 hover:bg-primary hover:text-white ${reverse ? "self-end" : "self-start"}`}
+    className={`mt-4 inline-flex items-center justify-center border border-transparent bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-black [font-variant:small-caps] transition-colors duration-200 hover:bg-primary hover:text-white self-start ${reverse ? "md:self-end" : "md:self-start"}`}
   >
     pokaż więcej
   </button>
@@ -88,13 +92,13 @@ const SegmentCard = ({
   }, [api]);
 
   return (
-    <animated.div
+    <AnimatedDiv
       ref={ref}
       style={springs}
-      className={`flex w-full items-center gap-8 ${reverse ? "flex-row-reverse" : "flex-row"}`}
+      className={`flex w-full items-center gap-6 md:gap-8 flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}
     >
       {/* Image placeholder — 3:4 ratio */}
-      <div className="aspect-[3/4] w-1/2 shrink-0 overflow-hidden rounded-md bg-white/10">
+      <div className="aspect-[3/4] w-full md:w-1/2 shrink-0 overflow-hidden rounded-md bg-white/10">
         <div className="flex h-full w-full items-center justify-center">
           <svg className="h-8 w-8 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -102,12 +106,12 @@ const SegmentCard = ({
         </div>
       </div>
       {/* Text */}
-      <div className={`flex flex-col justify-center gap-2 ${reverse ? "items-end text-right" : "items-start text-left"}`}>
-        <h2 className="mb-1 text-3xl font-bold text-foreground">{title}</h2>
+      <div className={`flex flex-col justify-center gap-2 items-start text-left ${reverse ? "md:items-end md:text-right" : "md:items-start md:text-left"}`}>
+        <h2 className="mb-1 text-3xl text-foreground">{title}</h2>
         <p className="text-base text-body-color leading-snug">{subtitle}</p>
         <SegmentButton reverse={reverse} />
       </div>
-    </animated.div>
+    </AnimatedDiv>
   );
 };
 
@@ -118,16 +122,16 @@ const SegmentsSection = () => {
   return (
     <section className="relative z-10 py-16 md:py-20 lg:py-24">
       <div className="container">
-        <div className="flex items-center justify-center gap-8">
+        <div className="flex flex-col items-center justify-center gap-8 lg:flex-row">
           {/* Left column — image on the right */}
-          <div className="flex flex-1 flex-col gap-8">
+          <div className="flex w-full flex-1 flex-col gap-8">
             {left.map((s) => (
               <SegmentCard key={s.title} {...s} reverse />
             ))}
           </div>
 
           {/* Right column — image on the left */}
-          <div className="flex flex-1 flex-col gap-8">
+          <div className="flex w-full flex-1 flex-col gap-8">
             {right.map((s) => (
               <SegmentCard key={s.title} {...s} />
             ))}

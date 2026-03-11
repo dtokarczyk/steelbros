@@ -28,7 +28,7 @@ const steps: ProcessStep[] = [
   { number: "06", title: "Wsparcie", description: "Zapewniamy gwarancję i serwis po zakończeniu projektu.", icon: faHeadset },
 ];
 
-const RADIUS = 340;
+const RADIUS = 280;
 const COUNT = steps.length;
 const SCROLL_SPEED = 0.05;
 
@@ -42,6 +42,7 @@ export default function ProcessCircle() {
   const containerSize = circleSize + 300;
   const sectionRef = useRef<HTMLElement>(null);
   const [scrollAngle, setScrollAngle] = useState(0);
+  const [parallaxY, setParallaxY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,6 +53,7 @@ export default function ProcessCircle() {
       const rawProgress = (windowH - rect.top) / (windowH + rect.height);
       const progress = Math.max(0, Math.min(1, rawProgress));
       setScrollAngle(progress * 360 * SCROLL_SPEED * 10);
+      setParallaxY((progress - 0.5) * 250);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -62,8 +64,8 @@ export default function ProcessCircle() {
   return (
     <section
       ref={sectionRef}
-      aria-labelledby="process-heading"
-      className="relative z-10 overflow-hidden py-16 md:py-24 lg:py-28"
+      aria-label="Nasz proces"
+      className="relative z-10 overflow-hidden py-4"
     >
 
       {/* Grid pattern background */}
@@ -95,17 +97,19 @@ export default function ProcessCircle() {
         }}
       />
 
-      <div className="container">
-        <div className="mb-12 text-center md:mb-16">
-          <h2
-            id="process-heading"
-            className="text-3xl font-semibold text-white sm:text-4xl md:text-5xl"
-            style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
-          >
-            Jak <em className="italic">pracujemy</em>.
-          </h2>
-        </div>
+      {/* Vertical label — parallax layer, absolutely positioned so it doesn't affect orbit centering */}
+      <div className="pointer-events-none absolute inset-y-0 left-4 z-20 hidden items-center md:flex lg:left-8 xl:left-12">
+        <span
+          className="select-none text-[1.75rem] font-bold uppercase tracking-[0.2em] text-white/10 transition-transform duration-75 ease-out will-change-transform lg:text-[2.5rem] [writing-mode:vertical-rl]"
+          style={{
+            transform: `rotate(180deg) translateY(${parallaxY}px)`,
+          }}
+        >
+          Nasz proces
+        </span>
+      </div>
 
+      <div className="container">
         {/* Desktop: orbiting circle */}
         <div
           className="process-orbit-container relative mx-auto hidden md:block"
@@ -134,61 +138,62 @@ export default function ProcessCircle() {
             }}
           />
 
-          {/* Center label */}
+          {/* Center label — SteelBros logo */}
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <span className="block text-xs font-bold uppercase tracking-[0.3em] text-white/30">
-                Nasz
-              </span>
-              <span className="block text-xs font-bold uppercase tracking-[0.3em] text-white/30">
-                Proces
-              </span>
-            </div>
+            <span
+              className="text-[22px] font-normal text-white/30"
+              style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
+            >
+              Steel Bros<span className="text-primary/30">.</span>
+            </span>
           </div>
 
           {/* Orbiting items */}
           {steps.map((step, i) => {
             const baseAngle = (360 / COUNT) * i - 90;
             return (
-            <div
-              key={step.number}
-              className="absolute will-change-transform"
-              style={{
-                top: "50%",
-                left: "50%",
-                width: 0,
-                height: 0,
-                transform: getOrbitTransform(baseAngle, scrollAngle),
-              }}
-            >
-              <div className="flex -translate-x-1/2 flex-col items-center">
-                <div className="-translate-y-1/2">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full border border-primary/25 bg-background transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(192,153,73,0.18)]">
-                    <FontAwesomeIcon
-                      icon={step.icon}
-                      className="text-xl text-primary"
-                    />
+              <div
+                key={step.number}
+                className="absolute will-change-transform"
+                style={{
+                  top: "50%",
+                  left: "50%",
+                  width: 0,
+                  height: 0,
+                  transform: getOrbitTransform(baseAngle, scrollAngle),
+                }}
+              >
+                <div className="flex -translate-x-1/2 flex-col items-center">
+                  <div className="-translate-y-1/2">
+                    <div className="flex h-14 w-14 items-center justify-center rounded-full border border-primary/25 bg-background transition-shadow duration-300 hover:shadow-[0_0_24px_rgba(192,153,73,0.18)]">
+                      <FontAwesomeIcon
+                        icon={step.icon}
+                        className="text-base text-primary"
+                      />
+                    </div>
+                  </div>
+                  <div className="-mt-1 w-36 text-center">
+                    <span className="block text-xs font-bold tracking-[0.2em] text-primary/50">
+                      {step.number}
+                    </span>
+                    <span className="block text-sm font-semibold text-white">
+                      {step.title}
+                    </span>
+                    <span className="mt-0.5 block text-xs leading-snug text-body-color">
+                      {step.description}
+                    </span>
                   </div>
                 </div>
-                <div className="mt-1 w-40 text-center">
-                  <span className="block text-xs font-bold tracking-[0.2em] text-primary/50">
-                    {step.number}
-                  </span>
-                  <span className="block text-sm font-semibold text-white">
-                    {step.title}
-                  </span>
-                  <span className="mt-1 block text-[11px] leading-snug text-body-color">
-                    {step.description}
-                  </span>
-                </div>
               </div>
-            </div>
             );
           })}
         </div>
 
         {/* Mobile: vertical timeline */}
         <div className="mx-auto max-w-xs md:hidden">
+          <h2 className="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
+            Nasz proces
+          </h2>
           <div className="relative flex flex-col gap-8 pl-8">
             {/* Vertical line */}
             <div className="absolute bottom-2 left-[22px] top-2 w-px bg-white/10" />

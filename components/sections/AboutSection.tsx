@@ -3,8 +3,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { animated, useSprings } from "@react-spring/web";
 
+const AnimatedSpan = animated.span as unknown as React.FC<{
+  children?: React.ReactNode;
+  className?: string;
+  style?: Record<string, unknown>;
+}>;
+
 const text =
-  "Jesteśmy studiem stalowym skupionym na człowieku. Pracujesz bezpośrednio z twórcami, bez pośredników. Projektujemy i budujemy konstrukcje funkcjonalne, piękne i zawsze wyprzedzające granice możliwości.";
+  "Rodzinny duet i surowa stal. Pracujesz z nami bezpośrednio - od pierwszego projektu po końcowy montaż. Kształtujemy materiał w solidne i piękne konstrukcje, które dopełniają przestrzenie prywatne i biznesowe.";
 const words = text.split(" ");
 
 const AboutSection = () => {
@@ -54,17 +60,20 @@ const AboutSection = () => {
           </p>
           <p
             id="about-heading"
-            className="text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl lg:text-[3.25rem]"
+            className="text-[1.5rem] font-semibold leading-[1.15] text-white sm:text-[2rem] md:text-[3rem] lg:text-[3.25rem]"
             style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
           >
             {springs.map((style, i) => (
               <React.Fragment key={i}>
-                <animated.span className="inline-block" style={style}>
+                <AnimatedSpan className="inline-block" style={style}>
                   {words[i]}
-                </animated.span>
+                </AnimatedSpan>
                 {i < words.length - 1 && " "}
               </React.Fragment>
             ))}
+          </p>
+          <p className="mt-6 text-base sm:text-lg font-medium tracking-wide text-white/50">
+            Marcel Wojdyła &amp; Mikołaj Wojdyła
           </p>
         </div>
       </div>

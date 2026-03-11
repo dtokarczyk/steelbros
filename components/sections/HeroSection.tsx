@@ -3,11 +3,23 @@
 import React, { useEffect, useRef, useState } from "react";
 import { animated, useSpring, useTrail } from "@react-spring/web";
 
+type AnimatedComponentProps = {
+  children?: React.ReactNode;
+  className?: string;
+  style?: Record<string, unknown>;
+  "aria-hidden"?: boolean | "true" | "false";
+};
+
+const AnimatedDiv = animated.div as unknown as React.FC<AnimatedComponentProps>;
+const AnimatedP = animated.p as unknown as React.FC<AnimatedComponentProps>;
+const AnimatedSpan = animated.span as unknown as React.FC<AnimatedComponentProps>;
+
 interface HeroSectionProps {
   title: string;
+  lead?: string;
 }
 
-export default function HeroSection({ title }: HeroSectionProps) {
+export default function HeroSection({ title, lead }: HeroSectionProps) {
   const words = title.split(" ");
   const [triggered, setTriggered] = useState(false);
   const [scrollOpacity, setScrollOpacity] = useState(1);
@@ -64,6 +76,14 @@ export default function HeroSection({ title }: HeroSectionProps) {
     delay: 650,
   });
 
+  // Lead paragraph — fade + slide up after title
+  const leadSpring = useSpring({
+    opacity: triggered ? 1 : 0,
+    y: triggered ? 0 : 12,
+    config: { mass: 1, tension: 140, friction: 28 },
+    delay: 900,
+  });
+
   return (
     <section
       id="home"
@@ -71,19 +91,19 @@ export default function HeroSection({ title }: HeroSectionProps) {
       className="relative overflow-hidden min-h-[90vh] flex items-center"
     >
       {/* Background image with fade + subtle scale */}
-      <animated.div
+      <AnimatedDiv
         aria-hidden
         className="absolute inset-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('/images/u2844336958_metal_fabrication_workshop_bokeh_effect_small_firm__7ce15e32-cb13-4f94-9cb5-73e806319454.png')",
+            "url('/images/u2844336958_Small_home-made_but_professional_welding_workshop_t_e4a3a6de-058a-4ad2-83ab-003f1ce20499.png')",
           opacity: bgSpring.opacity,
           scale: bgSpring.scale,
         }}
       />
 
       {/* Dark overlay */}
-      <animated.div
+      <AnimatedDiv
         className="absolute inset-0 bg-background/65"
         style={{ opacity: overlaySpring.opacity }}
       />
@@ -96,12 +116,12 @@ export default function HeroSection({ title }: HeroSectionProps) {
         <div className="max-w-5xl mx-auto py-[180px] text-center">
 
           {/* Label */}
-          <animated.p
+          <AnimatedP
             style={labelSpring}
             className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-white/60 [font-variant:small-caps]"
           >
             Małe konstrukcje stalowe
-          </animated.p>
+          </AnimatedP>
 
           {/* Title */}
           <h1
@@ -110,13 +130,22 @@ export default function HeroSection({ title }: HeroSectionProps) {
           >
             {trail.map((style, i) => (
               <React.Fragment key={i}>
-                <animated.span style={style} className="inline-block">
+                <AnimatedSpan style={style} className="inline-block">
                   {words[i]}
-                </animated.span>
+                </AnimatedSpan>
                 {i < words.length - 1 && " "}
               </React.Fragment>
             ))}
           </h1>
+
+          {lead && (
+            <AnimatedP
+              style={leadSpring}
+              className="mx-auto max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg"
+            >
+              {lead}
+            </AnimatedP>
+          )}
 
         </div>
       </div>

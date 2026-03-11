@@ -18,13 +18,14 @@ export default function HomePage() {
     <>
       <HeroSection
         title={content.hero.title}
+        lead={content.hero.lead}
       />
       <KeywordsSection />
       <AboutSection />
       <SegmentsSection />
+      <CaseStudyCarousel />
       <ProcessCircle />
       <TrustSection />
-      <CaseStudyCarousel />
     </>
   );
 }
