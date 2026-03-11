@@ -81,9 +81,9 @@ export default function ServicesHero({
       style={{ backgroundColor: `rgb(${r}, ${g}, ${b})` }}
     >
       <div className="container px-4">
-        <div className="py-24 sm:py-28 lg:py-32">
-          {/* Header + lead text on top (stays while image scrolls underneath/over it) */}
-          <div className="max-w-4xl text-left sticky top-24 z-0">
+        <div className="pt-24 pb-8 sm:pt-32 sm:pb-20 lg:py-24">
+          {/* Header + lead text on top (sticky on all screens) */}
+          <div className="max-w-4xl text-left sticky top-24">
             <AnimatedTitle words={words} triggered={triggered} />
 
             <A.p
@@ -92,7 +92,7 @@ export default function ServicesHero({
                 transform: subtitleSpring.y.to((y) => `translateY(${y}px)`),
                 fontFamily: '"Besley", "Times New Roman", serif',
               }}
-              className="mt-6 max-w-3xl text-xl leading-relaxed text-black sm:text-2xl md:text-3xl"
+              className="mt-6 max-w-3xl text-xl leading-relaxed text-background sm:text-2xl md:text-3xl"
             >
               {subtitle}
             </A.p>
@@ -104,8 +104,8 @@ export default function ServicesHero({
             </div>
           </div>
 
-          {/* Image in the middle – scrolls normally and może przykrywać tekst */}
-          <div className="mt-10 relative z-10 overflow-hidden rounded-lg bg-black/5 aspect-[16/8]">
+          {/* Image in the middle – below text on mobile */}
+          <div className="mt-10 relative overflow-hidden rounded-lg bg-black/5 aspect-[1/1] sm:aspect-[16/8]">
             <Image
               src={imageSrc}
               alt={imageAlt}
@@ -132,7 +132,7 @@ function AnimatedTitle({ words, triggered }: AnimatedTitleProps) {
 
   return (
     <h1
-      className="text-5xl font-semibold leading-tight text-black sm:text-6xl md:text-7xl lg:text-8xl"
+      className="text-5xl font-semibold leading-tight text-background sm:text-6xl md:text-7xl lg:text-8xl"
       style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
     >
       {trail.map((style, index) => (

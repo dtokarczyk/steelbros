@@ -16,7 +16,7 @@ module.exports = {
       transparent: "transparent",
       white: "#FFFFFF",
       black: "#000000",
-      background: "#1A1A1A",
+      background: "rgb(26, 26, 26)",
       foreground: "#FFFFFF",
       primary: "#C09949",
       "body-color": "#959CB1",

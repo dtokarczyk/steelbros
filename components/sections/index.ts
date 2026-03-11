@@ -6,3 +6,6 @@ export { default as CaseStudyCarousel } from "./CaseStudyCarousel";
 export { default as TrustSection } from "./TrustSection";
 export { default as ProcessCircle } from "./ProcessCircle";
 export { default as ServicesHero } from "./ServicesHero";
+export { default as ServicesList } from "./ServicesList";
+export { default as FaqSection } from "./FaqSection";
+export { default as ContactWithUs } from "./ContactWithUs";

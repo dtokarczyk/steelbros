@@ -68,7 +68,7 @@ const AboutSection = () => {
             ))}
           </p>
           <p className="mt-6 text-base sm:text-lg font-medium tracking-wide text-white/50">
-            Marcel Wojdyła &amp; Mikołaj Wojdyła
+            Marcel  &amp; Mikołaj
           </p>
         </div>
       </div>
