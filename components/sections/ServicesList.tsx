@@ -135,7 +135,7 @@ function getScrollProgress(el: HTMLElement): number {
 
 type ServiceCardProps = ServiceCase;
 
-const ServiceCard = ({ location, title, imageSrc, imageAlt }: ServiceCardProps) => {
+const ServiceCard = ({ title, imageSrc, imageAlt }: ServiceCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [springs, api] = useSpring(() => ({

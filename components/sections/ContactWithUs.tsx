@@ -37,7 +37,7 @@ const ContactWithUs = () => {
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-center">
-            <Button as="a" href="#contact-form" variant="primary">
+            <Button as="a" href="#contact-form" variant="light">
               Porozmawiajmy o Twoim projekcie
             </Button>
             <p className="text-xs text-white/50 md:text-sm">
