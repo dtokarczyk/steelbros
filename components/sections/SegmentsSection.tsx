@@ -3,44 +3,15 @@ import React, { useRef, useEffect } from "react";
 import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
 import Button from "../Button";
+import { ServicePageContent } from "@/app/oferta/(content)/types";
 
-const segments = [
-  {
-    slug: "dom-i-ogrod",
-    title: "Dom i ogród",
-    subtitle: "Pergole, kuchnie ogrodowe i detale stalowe dla Twojej przestrzeni.",
-  },
-  {
-    slug: "segment-nowoczesnych-wnetrz",
-    title: "Segment nowoczesnych wnętrz",
-    subtitle: "Drzwi i ścianki loftowe, detale stalowe do mieszkań i biur.",
-  },
-  {
-    slug: "uslugi-dla-firm-i-przemyslu",
-    title: "Usługi dla firm i przemysłu",
-    subtitle: "Rozwiązania stalowe dla zakładów, magazynów i produkcji.",
-  },
-  {
-    slug: "male-konstrukcje-budowlane",
-    title: "Małe konstrukcje budowlane",
-    subtitle: "Schody, podesty, balkony i inne konstrukcje uzupełniające.",
-  },
-  {
-    slug: "campery",
-    title: "Campery",
-    subtitle: "Zabudowy off-road, moduły do camperów i pojazdów specjalnych.",
-  },
-  {
-    slug: "architektura-miejska",
-    title: "Architektura miejska",
-    subtitle: "Mała architektura miejska – ławki, zadaszenia, detale.",
-  },
-  {
-    slug: "uslugi-dodatkowe",
-    title: "Usługi dodatkowe",
-    subtitle: "Cięcie, gięcie, spawanie i inne obróbki stali na zamówienie.",
-  },
-];
+function pagesToSegmentItems(pages: Record<string, ServicePageContent>): SegmentItem[] {
+  return Object.entries(pages).map(([slug, content]) => ({
+    slug,
+    title: content.ServicesHero?.title != null ? String(content.ServicesHero.title) : slug,
+    subtitle: content.ServicesHero?.subtitle != null ? String(content.ServicesHero.subtitle) : "",
+  }));
+}
 
 /** Maps scroll position to a 0–1 progress value for a given element. */
 function getScrollProgress(el: HTMLElement): number {
@@ -53,6 +24,12 @@ function getScrollProgress(el: HTMLElement): number {
   const raw = (start - rect.top) / (start - end);
   return Math.min(Math.max(raw, 0), 1);
 }
+
+export type SegmentItem = {
+  slug: string;
+  title: string;
+  subtitle: string;
+};
 
 const SegmentCard = ({
   title,
@@ -113,9 +90,14 @@ const SegmentCard = ({
   );
 };
 
-const SegmentsSection = () => {
-  const left = segments.slice(0, 3);
-  const right = segments.slice(3);
+export type SegmentsSectionProps = {
+  segments: Record<string, ServicePageContent>;
+};
+
+const SegmentsSection = ({ segments }: SegmentsSectionProps) => {
+  const list = Array.isArray(segments) ? segments : pagesToSegmentItems(segments);
+  const left = list.slice(0, 3);
+  const right = list.slice(3);
 
   return (
     <section className="relative z-10 py-16 md:py-20 lg:py-24">

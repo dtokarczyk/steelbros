@@ -8,7 +8,7 @@ const defaultText =
   "Rodzinny duet i surowa stal. Pracujesz z nami bezpośrednio - od pierwszego projektu po końcowy montaż. Kształtujemy materiał w solidne i piękne konstrukcje, które dopełniają przestrzenie prywatne i biznesowe.";
 const defaultWords = defaultText.split(" ");
 
-interface AboutSectionProps {
+export interface AboutSectionProps {
   label?: React.ReactNode;
   paragraph?: React.ReactNode;
   names?: React.ReactNode;

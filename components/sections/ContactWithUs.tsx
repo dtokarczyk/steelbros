@@ -3,7 +3,29 @@
 import React from "react";
 import Button from "../Button";
 
-const ContactWithUs = () => {
+const DEFAULT_CONTACT = {
+  title: "Masz pomysł na projekt ze stali?",
+  description:
+    "Napisz do nas kilka słów o tym, czego potrzebujesz – balustradę, pergolę, ogrodzenie, carport czy zupełnie niestandardowy element. Odezwiemy się z propozycją rozwiązań, wyceną i realnym terminem realizacji.",
+  buttonText: "Porozmawiajmy o Twoim projekcie",
+  buttonLink: "#contact-form",
+};
+
+
+export type ContactWithUsProps = {
+  title: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+};
+
+
+const ContactWithUs = ({
+  title = DEFAULT_CONTACT.title,
+  description = DEFAULT_CONTACT.description,
+  buttonText = DEFAULT_CONTACT.buttonText,
+  buttonLink = DEFAULT_CONTACT.buttonLink,
+}: Partial<ContactWithUsProps> = {}) => {
   return (
     <section
       id="contact"
@@ -20,25 +42,16 @@ const ContactWithUs = () => {
             id="contact-heading"
             className="text-2xl font-semibold text-white sm:text-3xl md:text-4xl"
           >
-            Masz pomysł na projekt ze stali?
+            {title}
           </h2>
 
           <p className="mt-4 text-sm leading-relaxed text-white/70 sm:text-base">
-            Napisz do nas kilka słów o tym, czego potrzebujesz – balustradę,
-            pergolę, ogrodzenie, carport czy zupełnie niestandardowy element.
-            Odezwiemy się z propozycją rozwiązań, wyceną i realnym terminem
-            realizacji.
-          </p>
-
-          <p className="mt-4 text-sm leading-relaxed text-white/60 sm:text-base">
-            Im więcej informacji nam przekażesz (wymiary, zdjęcia miejsca
-            montażu, inspiracje), tym precyzyjniej przygotujemy pierwszą
-            propozycję.
+            {description}
           </p>
 
           <div className="mt-8 flex flex-col items-start gap-3 md:flex-row md:items-center md:justify-center">
-            <Button as="a" href="#contact-form" variant="light">
-              Porozmawiajmy o Twoim projekcie
+            <Button as="a" href={buttonLink} variant="light">
+              {buttonText}
             </Button>
             <p className="text-xs text-white/50 md:text-sm">
               Wolisz zadzwonić? Dodaj numer telefonu, oddzwonimy.

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
-const faqs = [
+const defaultFaqs: FaqSectionProps["faqs"] = [
   {
     question: "Qu’est-ce qu’une infraction urbanistique ?",
     answer:
@@ -44,6 +44,12 @@ interface FaqItemProps {
   onToggle: () => void;
 }
 
+export type FaqSectionProps = {
+  title: string;
+  faqs: Array<{ question: string; answer: string }>;
+};
+
+
 const FaqItem = ({ question, answer, isOpen, onToggle }: FaqItemProps) => {
   const [springs, api] = useSpring(() => ({
     opacity: 0,
@@ -69,9 +75,8 @@ const FaqItem = ({ question, answer, isOpen, onToggle }: FaqItemProps) => {
       >
         <span>{question}</span>
         <span
-          className={`shrink-0 text-3xl leading-none text-white/70 transition-transform duration-200 ${
-            isOpen ? "rotate-45" : ""
-          }`}
+          className={`shrink-0 text-3xl leading-none text-white/70 transition-transform duration-200 ${isOpen ? "rotate-45" : ""
+            }`}
         >
           +
         </span>
@@ -92,8 +97,12 @@ const FaqItem = ({ question, answer, isOpen, onToggle }: FaqItemProps) => {
   );
 };
 
-const FaqSection = () => {
+const DEFAULT_FAQ_TITLE = "Zanim zaczniesz, możesz chcieć wiedzieć więcej.";
+
+const FaqSection = ({ title, faqs }: Partial<FaqSectionProps> = {}) => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const sectionTitle = title ?? DEFAULT_FAQ_TITLE;
+  const sectionFaqs = faqs ?? defaultFaqs;
 
   return (
     <section
@@ -107,12 +116,12 @@ const FaqSection = () => {
             className="text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl lg:text-[3.5rem]"
             style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
           >
-            Zanim zaczniesz, możesz chcieć wiedzieć więcej.
+            {sectionTitle}
           </h2>
         </header>
 
         <div className="rounded-xl bg-white/5 p-6 sm:p-8 md:p-10 lg:p-12 backdrop-blur-md">
-          {faqs.map((item, index) => (
+          {sectionFaqs.map((item, index) => (
             <FaqItem
               key={item.question}
               question={item.question}

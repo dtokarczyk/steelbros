@@ -12,6 +12,22 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
+const PROCESS_ICON_MAP: Record<string, IconDefinition> = {
+  "magnifying-glass": faMagnifyingGlass,
+  calculator: faCalculator,
+  "compass-drafting": faCompassDrafting,
+  gears: faGears,
+  wrench: faWrench,
+  headset: faHeadset,
+};
+
+export interface ProcessStepInput {
+  number: string;
+  title: string;
+  description?: string;
+  icon: string;
+}
+
 interface ProcessStep {
   number: string;
   title: React.ReactNode;
@@ -19,17 +35,30 @@ interface ProcessStep {
   icon: IconDefinition;
 }
 
-const steps: ProcessStep[] = [
-  { number: "01", title: "Analiza", description: "Poznajemy Twoje potrzeby i oceniamy możliwości realizacji.", icon: faMagnifyingGlass },
-  { number: "02", title: "Wycena", description: "Przygotowujemy szczegółową ofertę z transparentnym kosztorysem.", icon: faCalculator },
-  { number: "03", title: "Projektowanie CAD", description: "Tworzymy dokumentację techniczną i wizualizacje 3D.", icon: faCompassDrafting },
-  { number: "04", title: "Produkcja", description: "Realizujemy projekt w naszym warsztacie z dbałością o detale.", icon: faGears },
-  { number: "05", title: "Montaż", description: "Dostarczamy i montujemy konstrukcję na miejscu.", icon: faWrench },
-  { number: "06", title: "Wsparcie", description: "Zapewniamy gwarancję i serwis po zakończeniu projektu.", icon: faHeadset },
+const DEFAULT_STEPS: ProcessStepInput[] = [
+  { number: "01", title: "Analiza", description: "Poznajemy Twoje potrzeby i oceniamy możliwości realizacji.", icon: "magnifying-glass" },
+  { number: "02", title: "Wycena", description: "Przygotowujemy szczegółową ofertę z transparentnym kosztorysem.", icon: "calculator" },
+  { number: "03", title: "Projektowanie CAD", description: "Tworzymy dokumentację techniczną i wizualizacje 3D.", icon: "compass-drafting" },
+  { number: "04", title: "Produkcja", description: "Realizujemy projekt w naszym warsztacie z dbałością o detale.", icon: "gears" },
+  { number: "05", title: "Montaż", description: "Dostarczamy i montujemy konstrukcję na miejscu.", icon: "wrench" },
+  { number: "06", title: "Wsparcie", description: "Zapewniamy gwarancję i serwis po zakończeniu projektu.", icon: "headset" },
 ];
 
+function toProcessSteps(inputs: ProcessStepInput[]): ProcessStep[] {
+  return inputs.map((s) => ({
+    number: s.number,
+    title: s.title,
+    description: s.description ?? "",
+    icon: PROCESS_ICON_MAP[s.icon] ?? faGears,
+  }));
+}
+
+export interface ProcessCircleProps {
+  title?: string;
+  steps?: ProcessStepInput[];
+}
+
 const RADIUS = 280;
-const COUNT = steps.length;
 const SCROLL_SPEED = 0.05;
 
 function getOrbitTransform(baseAngle: number, scrollAngle: number): string {
@@ -37,7 +66,11 @@ function getOrbitTransform(baseAngle: number, scrollAngle: number): string {
   return `rotate(${angle}deg) translateX(${RADIUS}px) rotate(${-angle}deg)`;
 }
 
-export default function ProcessCircle() {
+export default function ProcessCircle({
+  title = "Nasz proces",
+  steps: stepsInput = DEFAULT_STEPS,
+}: ProcessCircleProps) {
+  const steps = toProcessSteps(stepsInput);
   const circleSize = RADIUS * 2;
   const containerSize = circleSize + 300;
   const sectionRef = useRef<HTMLElement>(null);
@@ -105,7 +138,7 @@ export default function ProcessCircle() {
             transform: `rotate(180deg) translateY(${parallaxY}px)`,
           }}
         >
-          Nasz proces
+          {title}
         </span>
       </div>
 
@@ -150,7 +183,7 @@ export default function ProcessCircle() {
 
           {/* Orbiting items */}
           {steps.map((step, i) => {
-            const baseAngle = (360 / COUNT) * i - 90;
+            const baseAngle = (360 / steps.length) * i - 90;
             return (
               <div
                 key={step.number}
@@ -192,7 +225,7 @@ export default function ProcessCircle() {
         {/* Mobile: vertical timeline */}
         <div className="mx-auto max-w-xs md:hidden">
           <h2 className="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/40">
-            Nasz proces
+            {title}
           </h2>
           <div className="relative flex flex-col gap-8 pl-8">
             {/* Vertical line */}

@@ -6,8 +6,9 @@ import { useSpring, useTrail, config } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
 const NAV_ITEMS = [
+  { label: "Strona główna", href: "/" },
   { label: "O nas", href: "#about" },
-  { label: "Oferta", href: "#segments" },
+  { label: "Oferta", href: "/oferta" },
   { label: "Realizacje", href: "#realizacje" },
   { label: "Kontakt", href: "#kontakt" },
 ];

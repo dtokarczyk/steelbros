@@ -9,7 +9,20 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 
-const realizacje = [
+export interface CaseStudyItem {
+  slug: string;
+  title: string;
+  description: string;
+}
+
+export interface CaseStudyCarouselProps {
+  title?: string;
+  items: CaseStudyItem[];
+  seeAllLabel?: string;
+  realizacjeBasePath?: string;
+}
+
+const DEFAULT_ITEMS: CaseStudyItem[] = [
   {
     slug: "brama-loftowa",
     title: "Brama loftowa",
@@ -60,12 +73,17 @@ const ImagePlaceholder = () => (
   </div>
 );
 
-export default function CaseStudyCarousel() {
+export default function CaseStudyCarousel({
+  title = "Nasze realizacje",
+  items = DEFAULT_ITEMS,
+  seeAllLabel = "Zobacz wszystkie",
+  realizacjeBasePath = "/realizacje",
+}: CaseStudyCarouselProps) {
   const swiperRef = useRef<SwiperType | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [parallaxY, setParallaxY] = useState(0);
-  const total = realizacje.length;
+  const total = items.length;
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -88,7 +106,7 @@ export default function CaseStudyCarousel() {
       <div className="container">
         {/* Horizontal heading — mobile only */}
         <h2 className="mb-6 text-sm font-semibold uppercase tracking-[0.2em] text-white/40 md:hidden">
-          Nasze realizacje
+          {title}
         </h2>
 
         <div className="flex items-stretch gap-6 md:gap-10">
@@ -100,7 +118,7 @@ export default function CaseStudyCarousel() {
                 transform: `rotate(180deg) translateY(${parallaxY}px)`,
               }}
             >
-              Nasze realizacje
+              {title}
             </span>
           </div>
 
@@ -124,10 +142,10 @@ export default function CaseStudyCarousel() {
               }}
               className="!overflow-visible"
             >
-              {realizacje.map((item) => (
+              {items.map((item) => (
                 <SwiperSlide key={item.slug}>
                   <Link
-                    href={`/realizacje/${item.slug}`}
+                    href={`${realizacjeBasePath}/${item.slug}`}
                     className="group block"
                   >
                     {/* Portrait image placeholder */}
@@ -152,12 +170,12 @@ export default function CaseStudyCarousel() {
               {/* See-all card */}
               <SwiperSlide>
                 <Link
-                  href="/realizacje"
+                  href={realizacjeBasePath}
                   className="group flex aspect-[3/4] w-full items-center justify-center border border-white/10 bg-white/5 transition-colors duration-300 hover:border-primary/40 hover:bg-primary/5"
                 >
                   <div className="text-center">
                     <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-foreground group-hover:text-primary">
-                      Zobacz wszystkie
+                      {seeAllLabel}
                     </p>
                     <svg
                       className="mx-auto h-5 w-5 text-primary transition-transform duration-300 group-hover:translate-x-1"

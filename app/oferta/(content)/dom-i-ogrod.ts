@@ -1,4 +1,4 @@
-import type { ServicePageContent } from "@/components/sections/types";
+import { ServicePageContent } from "./types";
 
 export const content: ServicePageContent = {
   ServicesHero: {

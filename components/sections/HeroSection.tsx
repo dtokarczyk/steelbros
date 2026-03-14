@@ -4,12 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSpring, useTrail } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
-interface HeroSectionProps {
+export interface HeroSectionProps {
   title: React.ReactNode;
   lead?: React.ReactNode;
+  label?: string;
 }
 
-export default function HeroSection({ title, lead }: HeroSectionProps) {
+export default function HeroSection({ title, lead, label }: HeroSectionProps) {
   const titleIsString = typeof title === "string";
   const words = titleIsString ? (title as string).split(" ") : [];
   const [triggered, setTriggered] = useState(false);
@@ -119,7 +120,7 @@ export default function HeroSection({ title, lead }: HeroSectionProps) {
             style={labelSpring}
             className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-white/60 [font-variant:small-caps]"
           >
-            Małe konstrukcje stalowe
+            {label ?? "Małe konstrukcje stalowe"}
           </A.p>
 
           {/* Title */}

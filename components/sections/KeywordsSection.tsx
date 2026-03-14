@@ -4,7 +4,7 @@ import { useSpring } from "@react-spring/web";
 import { useEffect, useRef, useState } from "react";
 import { A } from "@/lib/animated";
 
-const keywordsRowOne = [
+const DEFAULT_ROW_ONE = [
   "Pergole",
   "Konstrukcje stalowe",
   "Campery",
@@ -17,7 +17,7 @@ const keywordsRowOne = [
   "Cięcie stali",
 ];
 
-const keywordsRowTwo = [
+const DEFAULT_ROW_TWO = [
   "Jakość",
   "Precyzja",
   "Detale",
@@ -30,6 +30,12 @@ const keywordsRowTwo = [
 ];
 
 const SEPARATOR = "·";
+
+export interface KeywordsSectionProps {
+  rowOne?: string[];
+  rowTwo?: string[];
+  ariaLabel?: string;
+}
 
 const KeywordsStrip = ({
   words,
@@ -109,11 +115,15 @@ const KeywordsStrip = ({
   );
 };
 
-const KeywordsSection = () => {
+const KeywordsSection = ({
+  rowOne = DEFAULT_ROW_ONE,
+  rowTwo = DEFAULT_ROW_TWO,
+  ariaLabel = "Słowa kluczowe",
+}: KeywordsSectionProps) => {
   return (
-    <section aria-label="Słowa kluczowe" className="relative z-10">
-      <KeywordsStrip words={keywordsRowOne} direction="left" speed={0.5} />
-      <KeywordsStrip words={keywordsRowTwo} direction="right" speed={0.4} />
+    <section aria-label={ariaLabel} className="relative z-10">
+      <KeywordsStrip words={rowOne} direction="left" speed={0.5} />
+      <KeywordsStrip words={rowTwo} direction="right" speed={0.4} />
     </section>
   );
 };

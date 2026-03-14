@@ -18,44 +18,71 @@ import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import "swiper/css";
 import "swiper/css/pagination";
 
+const TRUST_ICON_MAP: Record<string, IconDefinition> = {
+  "shield-halved": faShieldHalved,
+  umbrella: faUmbrella,
+  "handshake-simple": faHandshakeSimple,
+  certificate: faCertificate,
+  "compass-drafting": faCompassDrafting,
+};
+
 interface TrustItem {
   icon: IconDefinition;
   title: string;
   description: string;
 }
 
-const items: TrustItem[] = [
+export interface TrustItemInput {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+function toTrustItems(inputs: TrustItemInput[]): TrustItem[] {
+  return inputs.map((i) => ({
+    icon: TRUST_ICON_MAP[i.icon] ?? faShieldHalved,
+    title: i.title,
+    description: i.description,
+  }));
+}
+
+const DEFAULT_ITEMS: TrustItemInput[] = [
   {
-    icon: faShieldHalved,
+    icon: "shield-halved",
     title: "Gwarancja 24 miesiące",
     description:
       "Każda realizacja objęta jest 24-miesięczną gwarancją na materiały i wykonanie.",
   },
   {
-    icon: faUmbrella,
+    icon: "umbrella",
     title: "Ubezpieczenie",
     description:
       "Posiadamy pełne ubezpieczenie OC, chroniące Ciebie i Twój projekt na każdym etapie.",
   },
   {
-    icon: faHandshakeSimple,
+    icon: "handshake-simple",
     title: "Indywidualne podejście",
     description:
       "Pracujemy bezpośrednio z klientem, dopasowując rozwiązania do indywidualnych potrzeb.",
   },
   {
-    icon: faCertificate,
+    icon: "certificate",
     title: "Certyfikaty",
     description:
       "Posiadamy wszystkie wymagane certyfikaty i uprawnienia branżowe.",
   },
   {
-    icon: faCompassDrafting,
+    icon: "compass-drafting",
     title: "Projektowanie",
     description:
       "Oferujemy kompleksowe projektowanie 3D przed rozpoczęciem realizacji.",
   },
 ];
+
+export interface TrustSectionProps {
+  title?: React.ReactNode;
+  items?: TrustItemInput[];
+}
 
 const TrustCard = ({
   item,
@@ -162,10 +189,20 @@ const TrustCard = ({
   );
 };
 
-const TrustSection = () => {
+const TrustSection = ({
+  title,
+  items: itemsInput = DEFAULT_ITEMS,
+}: TrustSectionProps) => {
+  const items = toTrustItems(itemsInput);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const mobileSwiperRef = useRef<SwiperType | null>(null);
   const total = items.length;
+
+  const titleNode = title ?? (
+    <>
+      Pewność i <em className="italic text-primary">bezpieczeństwo</em>.
+    </>
+  );
 
   return (
     <section
@@ -179,8 +216,7 @@ const TrustSection = () => {
             className="text-3xl font-semibold text-white sm:text-4xl md:text-5xl"
             style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
           >
-            Pewność i{" "}
-            <em className="italic text-primary">bezpieczeństwo</em>.
+            {titleNode}
           </h2>
         </div>
         {/* Mobile: swiper with single card */}

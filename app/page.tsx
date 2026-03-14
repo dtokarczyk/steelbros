@@ -7,25 +7,25 @@ import {
   TrustSection,
   ProcessCircle,
 } from "@/components/sections";
-import { getHomeContent } from "@/lib/content";
-import { notFound } from "next/navigation";
+import { homeContent } from "./(content)";
+import { pages } from "./oferta/(content)";
 
 export default function HomePage() {
-  const content = getHomeContent();
-  if (!content) notFound();
+  const content = homeContent;
 
   return (
     <>
       <HeroSection
-        title={content.hero.title}
-        lead={content.hero.lead}
+        {...content.hero}
       />
-      <KeywordsSection />
-      <AboutSection />
-      <SegmentsSection />
-      <CaseStudyCarousel />
-      <ProcessCircle />
-      <TrustSection />
+      <KeywordsSection {...content.keywords} />
+      <AboutSection {...content.about} />
+      <SegmentsSection segments={pages} />
+      <CaseStudyCarousel
+        {...content.caseStudyCarousel}
+      />
+      <ProcessCircle {...content.process} />
+      <TrustSection {...content.trust} />
     </>
   );
 }
