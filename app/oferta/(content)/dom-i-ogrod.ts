@@ -1,23 +1,73 @@
 import { ServicePageContent } from "./types";
 
-export const content: ServicePageContent = {
+export const homeAndGardenContent: ServicePageContent = {
   ServicesHero: {
-    title: "Małe konstrukcje stalowe",
-    subtitle: "Pergole, kuchnie ogrodowe i detale stalowe dla Twojej przestrzeni."
+    title: "Stalowe elementy do domu i ogrodu",
+    subtitle: "Nowoczesne donice, paleniska i altany, które zmienią Twój ogród w strefę luksusowego relaksu."
   },
   TextSplitSection: {
-    title: "Dlaczego warto wybrać nasze rozwiązania do domu i ogrodu?",
-    body: "Nasze konstrukcje stalowe są odpowiednie dla każdego budowniczego, który chce zbudować dom lub ogrod. Nasze produkty są wykonane z najwyższej jakości materiałów i są zawsze dostosowane do potrzeb klienta. Nasze konstrukcje są również bardzo trwałe i łatwo się utrzymują."
+    title: "Dlaczego warto wybrać stalowe wyposażenie ogrodu od SteelBros?",
+    body: "Stal to materiał, który łączy w sobie surową elegancję z niezwykłą trwałością. W SteelBros tworzymy nowoczesne rozwiązania ogrodowe, które są odporne na warunki atmosferyczne i nie wymagają skomplikowanej konserwacji. Od modnych donic z cortenu, przez solidne paleniska ogrodowe i grille, aż po wytrzymałe altany i ogrodzenia panelowe – nasze konstrukcje projektujemy tak, aby służyły przez lata. Każdy projekt dopasowujemy do indywidualnych potrzeb, dbając o precyzję wykonania i najwyższej jakości zabezpieczenia antykorozyjne."
   },
   ServicesList: {
-    eyebrow: "Nasze usługi",
-    title: "Przykłady regularizacji",
-    description: "Kilka konkretnych sytuacji, w których interwencja architektoniczna i regularizacja umożliwiła zabezpieczenie nieruchomości, optymalizację jej codziennego użytkowania i wzrost wartości majątku.",
+    eyebrow: "Nasza oferta",
+    title: "Wyposażenie ogrodu i posesji",
+    description: "Poznaj nasze flagowe produkty ze stali czarnej, nierdzewnej oraz cortenu, które wzbogacą architekturę Twojego otoczenia.",
     services: [
       {
-        title: "Pergole",
-        imageSrc: "",
-        imageAlt: "Pergole"
+        title: "Donice stalowe i z cortenu",
+        imageSrc: "/images/donice-corten.jpg",
+        imageAlt: "Nowoczesne donice ogrodowe z blachy corten"
+      },
+      {
+        title: "Paleniska ogrodowe",
+        imageSrc: "/images/paleniska-stalowe.jpg",
+        imageAlt: "Stalowe palenisko ogrodowe"
+      },
+      {
+        title: "Grille stalowe stalowe",
+        imageSrc: "/images/grille-stalowe.jpg",
+        imageAlt: "Stalowa grille ogrodowa"
+      },
+      {
+        title: "Kuchnie ogrodowe stalowe",
+        imageSrc: "/images/grille-stalowe.jpg",
+        imageAlt: "Stalowa grille ogrodowa"
+      },
+      {
+        title: "Stojaki na drewno kominkowe",
+        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
+      },
+      {
+        title: "Stojaki rowerowe",
+        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
+      },
+      {
+        title: "Huśtawki ogrodowe stalowe",
+        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
+      },
+      {
+        title: "Altany stalowe",
+        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
+      },
+      {
+        title: "Ogrodzenia panelowe",
+        imageSrc: "/images/ogrodzenia-panelowe.jpg",
+        imageAlt: "Nowoczesne ogrodzenie panelowe z bramą przesuwną"
+      },
+      {
+        title: "Bramy przesuwne automatyczne",
+        imageSrc: "/images/altany-zadaszenia.jpg",
+        imageAlt: "Stalowa konstrukcja altany ogrodowej"
+      },
+      {
+        title: "Zadaszenia nad drzwiami",
+        imageSrc: "/images/altany-zadaszenia.jpg",
+        imageAlt: "Stalowa konstrukcja altany ogrodowej"
       }
     ]
   },
@@ -25,15 +75,19 @@ export const content: ServicePageContent = {
     title: "Często zadawane pytania",
     faqs: [
       {
-        question: "Czy można zamówić konstrukcję stalową?",
-        answer: "Tak, można zamówić konstrukcję stalową. W naszej ofercie znajdziesz różne modele i rozwiązania, dostosowane do Twoich potrzeb."
+        question: "Jak zabezpieczacie elementy stalowe przed rdzą?",
+        answer: "Wszystkie nasze konstrukcje ogrodowe, z wyjątkiem naturalnie rdzewiejącego cortenu, poddajemy cynkowaniu ogniowemu oraz malowaniu proszkowemu. To gwarantuje wieloletnią ochronę przed warunkami atmosferycznymi."
+      },
+      {
+        question: "Czy mogę zamówić niestandardowy wymiar donicy lub paleniska?",
+        answer: "Oczywiście. Realizujemy zlecenia na wymiar. Nasi projektanci przygotują odpowiedni projekt dopasowany do wymiarów Twojego tarasu lub ogrodu."
       }
     ]
   },
   ContactWithUs: {
-    title: "Skontaktuj się z nami",
-    description: "Jeśli masz pytania lub potrzebujesz pomocy, skontaktuj się z nami. Jesteśmy tu, aby Ci pomóc.",
-    buttonText: "Skontaktuj się z nami",
+    title: "Odmień swój ogród ze SteelBros",
+    description: "Szukasz trwałych i designerskich rozwiązań do swojego ogrodu? Napisz do nas, a przygotujemy darmową wycenę Twojego pomysłu.",
+    buttonText: "Poproś o wycenę",
     buttonLink: "/kontakt"
   }
 }

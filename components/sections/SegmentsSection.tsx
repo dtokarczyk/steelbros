@@ -1,8 +1,9 @@
 "use client";
 import React, { useRef, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
-import Button from "../Button";
 import { ServicePageContent } from "@/app/oferta/(content)/types";
 
 function pagesToSegmentItems(pages: Record<string, ServicePageContent>): SegmentItem[] {
@@ -10,6 +11,8 @@ function pagesToSegmentItems(pages: Record<string, ServicePageContent>): Segment
     slug,
     title: content.ServicesHero?.title != null ? String(content.ServicesHero.title) : slug,
     subtitle: content.ServicesHero?.subtitle != null ? String(content.ServicesHero.subtitle) : "",
+    heroImageSrc: content.ServicesHero?.imageSrc,
+    heroImageAlt: content.ServicesHero?.imageAlt ?? "",
   }));
 }
 
@@ -29,15 +32,23 @@ export type SegmentItem = {
   slug: string;
   title: string;
   subtitle: string;
+  heroImageSrc?: string;
+  heroImageAlt?: string;
 };
 
 const SegmentCard = ({
+  slug,
   title,
   subtitle,
+  heroImageSrc,
+  heroImageAlt,
   reverse = false,
 }: {
+  slug: string;
   title: React.ReactNode;
   subtitle: React.ReactNode;
+  heroImageSrc?: string;
+  heroImageAlt?: string;
   reverse?: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -70,21 +81,34 @@ const SegmentCard = ({
       style={springs}
       className={`flex w-full items-center gap-6 md:gap-8 flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}
     >
-      {/* Image placeholder — 3:4 ratio */}
+      {/* Hero image from content or placeholder — 3:4 ratio */}
       <div className="aspect-[3/4] w-full md:w-1/2 shrink-0 overflow-hidden rounded-md bg-white/10">
-        <div className="flex h-full w-full items-center justify-center">
-          <svg className="h-8 w-8 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-          </svg>
-        </div>
+        {heroImageSrc ? (
+          <Image
+            src={heroImageSrc}
+            alt={heroImageAlt ?? ""}
+            width={600}
+            height={800}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center">
+            <svg className="h-8 w-8 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+        )}
       </div>
       {/* Text */}
       <div className={`flex flex-col justify-center gap-2 items-start text-left ${reverse ? "md:items-end md:text-right" : "md:items-start md:text-left"}`}>
         <h2 className="mb-1 text-3xl text-foreground">{title}</h2>
         <p className="text-base text-body-color leading-snug">{subtitle}</p>
-        <Button className={`mt-4 self-start ${reverse ? "md:self-end" : "md:self-start"}`}>
+        <Link
+          href={`/oferta/${slug}`}
+          className={`mt-4 self-start inline-flex items-center justify-center border border-transparent bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-black [font-variant:small-caps] transition-colors duration-200 hover:bg-primary hover:text-white ${reverse ? "md:self-end" : "md:self-start"}`}
+        >
           pokaż więcej
-        </Button>
+        </Link>
       </div>
     </A.div>
   );
