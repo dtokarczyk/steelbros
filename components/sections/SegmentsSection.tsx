@@ -6,30 +6,37 @@ import Button from "../Button";
 
 const segments = [
   {
+    slug: "dom-i-ogrod",
     title: "Dom i ogród",
     subtitle: "Pergole, kuchnie ogrodowe i detale stalowe dla Twojej przestrzeni.",
   },
   {
+    slug: "segment-nowoczesnych-wnetrz",
     title: "Segment nowoczesnych wnętrz",
     subtitle: "Drzwi i ścianki loftowe, detale stalowe do mieszkań i biur.",
   },
   {
+    slug: "uslugi-dla-firm-i-przemyslu",
     title: "Usługi dla firm i przemysłu",
     subtitle: "Rozwiązania stalowe dla zakładów, magazynów i produkcji.",
   },
   {
+    slug: "male-konstrukcje-budowlane",
     title: "Małe konstrukcje budowlane",
     subtitle: "Schody, podesty, balkony i inne konstrukcje uzupełniające.",
   },
   {
+    slug: "campery",
     title: "Campery",
     subtitle: "Zabudowy off-road, moduły do camperów i pojazdów specjalnych.",
   },
   {
+    slug: "architektura-miejska",
     title: "Architektura miejska",
     subtitle: "Mała architektura miejska – ławki, zadaszenia, detale.",
   },
   {
+    slug: "uslugi-dodatkowe",
     title: "Usługi dodatkowe",
     subtitle: "Cięcie, gięcie, spawanie i inne obróbki stali na zamówienie.",
   },
@@ -117,14 +124,14 @@ const SegmentsSection = () => {
           {/* Left column — image on the right */}
           <div className="flex w-full flex-1 flex-col gap-8">
             {left.map((s) => (
-              <SegmentCard key={s.title} {...s} reverse />
+              <SegmentCard key={s.slug} {...s} reverse />
             ))}
           </div>
 
           {/* Right column — image on the left */}
           <div className="flex w-full flex-1 flex-col gap-8">
             {right.map((s) => (
-              <SegmentCard key={s.title} {...s} />
+              <SegmentCard key={s.slug} {...s} />
             ))}
           </div>
         </div>

@@ -6,7 +6,7 @@ import { useSpring, useTrail } from "@react-spring/web";
 import { A } from "@/lib/animated";
 import Button from "../Button";
 
-interface ServicesHeroProps {
+export interface ServicesHeroProps {
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   imageSrc?: string;
@@ -86,7 +86,7 @@ export default function ServicesHero({
       style={{ backgroundColor: `rgb(${r}, ${g}, ${b})` }}
     >
       <div className="container px-4">
-        <div className="pt-24 pb-8 sm:pt-32 sm:pb-20 lg:py-24">
+        <div className="pt-48 pb-8 sm:pt-64 sm:pb-20 lg:pt-48 lg:pb-24">
           {/* Header + lead text on top (sticky on all screens) */}
           <div className="max-w-4xl text-left sticky top-24">
             {title != null &&

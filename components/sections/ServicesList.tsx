@@ -5,13 +5,27 @@ import Image from "next/image";
 import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
-type ServiceCase = {
+export type ServiceCase = {
   title: React.ReactNode;
   imageSrc: string;
   imageAlt: string;
 };
 
-const serviceCases: ServiceCase[] = [
+export type ServicesListProps = {
+  /** Section id for anchor links */
+  id?: string;
+  /** Small label above the title (e.g. "Nasze usługi") */
+  eyebrow?: string;
+  /** Main heading */
+  title?: string;
+  /** Description paragraph below the title */
+  description?: string;
+  /** List of service cards to display */
+  services?: ServiceCase[];
+};
+
+/** Default list of service cases (Dom i ogród). Export for reuse or composition. */
+export const defaultServiceCases: ServiceCase[] = [
   {
     title: "Balustrady zewnętrzne i wewnętrzne",
     imageSrc:
@@ -183,28 +197,38 @@ const ServiceCard = ({ title, imageSrc, imageAlt }: ServiceCardProps) => {
   );
 };
 
-const ServicesList = () => {
+const DEFAULT_EYEBROW = "Nasze usługi";
+const DEFAULT_TITLE = "Przykłady regularizacji";
+const DEFAULT_DESCRIPTION =
+  "Kilka konkretnych sytuacji, w których interwencja architektoniczna i regularizacja umożliwiła zabezpieczenie nieruchomości, optymalizację jej codziennego użytkowania i wzrost wartości majątku.";
+
+const ServicesList = ({
+  id = "services-more",
+  eyebrow = DEFAULT_EYEBROW,
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  services = defaultServiceCases,
+}: ServicesListProps) => {
   return (
-    <section id="services-more" className="bg-background py-16 md:py-20 lg:py-24">
+    <section id={id} className="bg-background py-16 md:py-20 lg:py-24">
       <div className="container px-4">
         <div className="mx-auto flex flex-col gap-4 text-left lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
             <p className="mb-1 text-xs font-semibold uppercase tracking-[0.25em] text-white/50 [font-variant:small-caps]">
-              Nasze usługi
+              {eyebrow}
             </p>
             <h2 className="mb-2 text-2xl font-semibold text-white sm:text-3xl">
-              Przykłady regularizacji
+              {title}
             </h2>
             <p className="text-sm leading-relaxed text-white/60 sm:text-base">
-              Kilka konkretnych sytuacji, w których interwencja architektoniczna i regularizacja umożliwiła
-              zabezpieczenie nieruchomości, optymalizację jej codziennego użytkowania i wzrost wartości majątku.
+              {description}
             </p>
           </div>
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {serviceCases.map((service) => (
-            <ServiceCard key={service.title} {...service} />
+          {services.map((service, index) => (
+            <ServiceCard key={`${service.imageSrc}-${index}`} {...service} />
           ))}
         </div>
       </div>

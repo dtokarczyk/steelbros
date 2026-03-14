@@ -1,6 +1,6 @@
 import React from "react";
 
-interface TextSplitSectionProps {
+export interface TextSplitSectionProps {
   eyebrow?: React.ReactNode;
   title?: React.ReactNode;
   body?: React.ReactNode;

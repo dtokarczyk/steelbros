@@ -1,1 +1,0 @@
-Kategoria obejmuje elementy do domu i ogrodu – balustrady zewnętrzne i wewnętrzne, bramy i ogrodzenia kute, pergole, zadaszenia, wiaty, carporty, schody, donice stalowe i corten, paleniska i kuchnie ogrodowe. Wykonujemy wszystko ze sprawdzonej stali, z dbałością o trwałość i estetykę.
