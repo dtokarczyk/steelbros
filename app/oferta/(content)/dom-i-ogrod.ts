@@ -18,12 +18,12 @@ export const homeAndGardenContent: ServicePageContent = {
     services: [
       {
         title: "Donice stalowe i z cortenu",
-        imageSrc: "/images/donice-corten.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_square_steel_flowerpot_in_the_garden_professional_fb723cdb-df2f-4fae-b7be-6482f07e1300_2.png",
         imageAlt: "Nowoczesne donice ogrodowe z blachy corten"
       },
       {
         title: "Paleniska ogrodowe",
-        imageSrc: "/images/paleniska-stalowe.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_bonfire_pit_in_the_garden_professional_photograph_7b45bf90-dca2-4f8d-97df-a7d120ec288c_3.png",
         imageAlt: "Stalowe palenisko ogrodowe"
       },
       {
@@ -33,7 +33,7 @@ export const homeAndGardenContent: ServicePageContent = {
       },
       {
         title: "Kuchnie ogrodowe stalowe",
-        imageSrc: "/images/grille-stalowe.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_garden_kitchen_steel_professional_photography_--a_ff3bf8df-8776-49a7-b599-3300f457efc3_1.png",
         imageAlt: "Stalowa grille ogrodowa"
       },
       {
