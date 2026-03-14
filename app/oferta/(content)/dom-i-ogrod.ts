@@ -3,7 +3,9 @@ import { ServicePageContent } from "./types";
 export const homeAndGardenContent: ServicePageContent = {
   ServicesHero: {
     title: "Stalowe elementy do domu i ogrodu",
-    subtitle: "Nowoczesne donice, paleniska i altany, które zmienią Twój ogród w strefę luksusowego relaksu."
+    subtitle: "Nowoczesne donice, paleniska i altany, które zmienią Twój ogród w strefę luksusowego relaksu.",
+    imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_steel_garden_fireplace_in_the_garden_professional_p_b762d357-a3c0-41e3-a550-badb7dea2d71.png",
+    imageAlt: "Stalowe elementy do domu i ogrodu"
   },
   TextSplitSection: {
     title: "Dlaczego warto wybrać stalowe wyposażenie ogrodu od SteelBros?",

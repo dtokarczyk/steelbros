@@ -17,8 +17,11 @@ export interface AboutSectionProps {
 const AboutSection = ({ label, paragraph, names }: AboutSectionProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [visibleCount, setVisibleCount] = useState(0);
-  const useWordAnimation = paragraph == null;
-  const words = defaultWords;
+  // Use word animation when paragraph is a string or when not provided (use default text)
+  const paragraphString =
+    typeof paragraph === "string" ? paragraph : paragraph == null ? defaultText : null;
+  const useWordAnimation = paragraphString !== null;
+  const words = paragraphString !== null ? paragraphString.split(" ") : defaultWords;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +42,7 @@ const AboutSection = ({ label, paragraph, names }: AboutSectionProps) => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
     };
-  }, []);
+  }, [words.length]);
 
   // Each word gets its own spring — animates to white when scroll reaches it (only when using default text)
   const springs = useSprings(

@@ -81,15 +81,20 @@ const SegmentCard = ({
       style={springs}
       className={`flex w-full items-center gap-6 md:gap-8 flex-col ${reverse ? "md:flex-row-reverse" : "md:flex-row"}`}
     >
-      {/* Hero image from content or placeholder — 3:4 ratio */}
-      <div className="aspect-[3/4] w-full md:w-1/2 shrink-0 overflow-hidden rounded-md bg-white/10">
+      {/* Hero image from content or placeholder — 3:4 ratio, clickable */}
+      <Link
+        href={`/oferta/${slug}`}
+        className="aspect-[3/4] w-full md:w-1/2 shrink-0 overflow-hidden rounded-md bg-white/10 block focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        aria-label={`Zobacz ofertę: ${title}`}
+        scroll={false}
+      >
         {heroImageSrc ? (
           <Image
             src={heroImageSrc}
             alt={heroImageAlt ?? ""}
             width={600}
             height={800}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover transition-transform duration-200 hover:scale-105"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
@@ -98,7 +103,7 @@ const SegmentCard = ({
             </svg>
           </div>
         )}
-      </div>
+      </Link>
       {/* Text */}
       <div className={`flex flex-col justify-center gap-2 items-start text-left ${reverse ? "md:items-end md:text-right" : "md:items-start md:text-left"}`}>
         <h2 className="mb-1 text-3xl text-foreground">{title}</h2>
@@ -106,8 +111,10 @@ const SegmentCard = ({
         <Link
           href={`/oferta/${slug}`}
           className={`mt-4 self-start inline-flex items-center justify-center border border-transparent bg-white px-5 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-black [font-variant:small-caps] transition-colors duration-200 hover:bg-primary hover:text-white ${reverse ? "md:self-end" : "md:self-start"}`}
+          aria-label={`Zobacz ofertę: ${title}`}
+          scroll={false}
         >
-          pokaż więcej
+          Pokaż więcej
         </Link>
       </div>
     </A.div>
