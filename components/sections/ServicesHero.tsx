@@ -7,11 +7,11 @@ import { A } from "@/lib/animated";
 import Button from "../Button";
 
 interface ServicesHeroProps {
-  title?: string;
-  subtitle?: string;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
   imageSrc?: string;
   imageAlt?: string;
-  caption?: string;
+  caption?: React.ReactNode;
 }
 
 interface AnimatedTitleProps {
@@ -19,20 +19,18 @@ interface AnimatedTitleProps {
   triggered: boolean;
 }
 
-const DEFAULT_IMAGE =
-  "/images/u2844336958_Small_home-made_but_professional_welding_workshop_t_e4a3a6de-058a-4ad2-83ab-003f1ce20499.png";
-
 export default function ServicesHero({
-  title = "Dom i ogród",
-  subtitle = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.",
-  imageSrc = DEFAULT_IMAGE,
-  imageAlt = "Przykładowa realizacja dom i ogród",
-  caption = "Od projektu po realizację — pomagamy uporządkować przestrzeń domu i ogrodu, dbając o estetykę, funkcjonalność i zgodność z przepisami.",
+  title,
+  subtitle,
+  imageSrc,
+  imageAlt,
+  caption,
 }: ServicesHeroProps) {
   const [triggered, setTriggered] = useState(false);
   const [darkness, setDarkness] = useState(0);
   const sectionRef = useRef<HTMLElement | null>(null);
-  const words = title.split(" ");
+  const titleIsString = typeof title === "string";
+  const words = titleIsString && title ? (title as string).split(" ") : [];
 
   useEffect(() => {
     const t = setTimeout(() => setTriggered(true), 100);
@@ -52,6 +50,13 @@ export default function ServicesHero({
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const titleSpring = useSpring({
+    opacity: triggered ? 1 : 0,
+    y: triggered ? 0 : 18,
+    config: { mass: 1, tension: 160, friction: 26 },
+    delay: 220,
+  });
 
   const subtitleSpring = useSpring({
     opacity: triggered ? 1 : 0,
@@ -84,18 +89,38 @@ export default function ServicesHero({
         <div className="pt-24 pb-8 sm:pt-32 sm:pb-20 lg:py-24">
           {/* Header + lead text on top (sticky on all screens) */}
           <div className="max-w-4xl text-left sticky top-24">
-            <AnimatedTitle words={words} triggered={triggered} />
+            {title != null &&
+              (titleIsString && words.length > 0 ? (
+                <AnimatedTitle words={words} triggered={triggered} />
+              ) : (
+                <h1
+                  className="text-5xl font-semibold leading-tight text-background sm:text-6xl md:text-7xl lg:text-8xl"
+                  style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
+                >
+                  <A.span
+                    style={{
+                      opacity: titleSpring.opacity,
+                      transform: titleSpring.y.to((y) => `translateY(${y}px)`),
+                      display: "inline-block",
+                    }}
+                  >
+                    {title}
+                  </A.span>
+                </h1>
+              ))}
 
-            <A.p
-              style={{
-                opacity: subtitleSpring.opacity,
-                transform: subtitleSpring.y.to((y) => `translateY(${y}px)`),
-                fontFamily: '"Besley", "Times New Roman", serif',
-              }}
-              className="mt-6 max-w-3xl text-xl leading-relaxed text-background sm:text-2xl md:text-3xl"
-            >
-              {subtitle}
-            </A.p>
+            {subtitle != null && (
+              <A.p
+                style={{
+                  opacity: subtitleSpring.opacity,
+                  transform: subtitleSpring.y.to((y) => `translateY(${y}px)`),
+                  fontFamily: '"Besley", "Times New Roman", serif',
+                }}
+                className="mt-6 max-w-3xl text-xl leading-relaxed text-background sm:text-2xl md:text-3xl"
+              >
+                {subtitle}
+              </A.p>
+            )}
 
             <div className="mt-6">
               <Button as="a" href="#services-more" variant="dark">
@@ -105,16 +130,30 @@ export default function ServicesHero({
           </div>
 
           {/* Image in the middle – below text on mobile */}
-          <div className="mt-10 relative overflow-hidden rounded-lg bg-black/5 aspect-[1/1] sm:aspect-[16/8]">
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              width={1920}
-              height={960}
-              className="h-full w-full object-cover"
-              priority
-            />
-          </div>
+          {imageSrc && (
+            <div className="mt-10 relative overflow-hidden rounded-lg bg-black/5 aspect-[1/1] sm:aspect-[16/8]">
+              <Image
+                src={imageSrc}
+                alt={imageAlt ?? ""}
+                width={1920}
+                height={960}
+                className="h-full w-full object-cover"
+                priority
+              />
+            </div>
+          )}
+
+          {caption != null && (
+            <A.p
+              style={{
+                opacity: captionSpring.opacity,
+                transform: captionSpring.y.to((y) => `translateY(${y}px)`),
+              }}
+              className="mt-4 max-w-3xl text-base leading-relaxed text-background/90 sm:text-lg"
+            >
+              {caption}
+            </A.p>
+          )}
 
         </div>
       </div>

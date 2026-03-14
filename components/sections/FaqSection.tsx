@@ -38,8 +38,8 @@ const faqs = [
 ];
 
 interface FaqItemProps {
-  question: string;
-  answer: string;
+  question: React.ReactNode;
+  answer: React.ReactNode;
   isOpen: boolean;
   onToggle: () => void;
 }

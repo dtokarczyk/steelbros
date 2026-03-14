@@ -4,13 +4,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSprings } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
-const text =
+const defaultText =
   "Rodzinny duet i surowa stal. Pracujesz z nami bezpośrednio - od pierwszego projektu po końcowy montaż. Kształtujemy materiał w solidne i piękne konstrukcje, które dopełniają przestrzenie prywatne i biznesowe.";
-const words = text.split(" ");
+const defaultWords = defaultText.split(" ");
 
-const AboutSection = () => {
+interface AboutSectionProps {
+  label?: React.ReactNode;
+  paragraph?: React.ReactNode;
+  names?: React.ReactNode;
+}
+
+const AboutSection = ({ label, paragraph, names }: AboutSectionProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [visibleCount, setVisibleCount] = useState(0);
+  const useWordAnimation = paragraph == null;
+  const words = defaultWords;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +41,7 @@ const AboutSection = () => {
     };
   }, []);
 
-  // Each word gets its own spring — animates to white when scroll reaches it
+  // Each word gets its own spring — animates to white when scroll reaches it (only when using default text)
   const springs = useSprings(
     words.length,
     words.map((_, i) => ({
@@ -51,24 +59,28 @@ const AboutSection = () => {
       <div className="container">
         <div ref={containerRef} className="max-w-5xl mx-auto text-center">
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-white/60 [font-variant:small-caps]">
-            About
+            {label ?? "About"}
           </p>
           <p
             id="about-heading"
             className="text-[1.5rem] font-semibold leading-[1.15] text-white sm:text-[2rem] md:text-[3rem] lg:text-[3.25rem]"
             style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
           >
-            {springs.map((style, i) => (
-              <React.Fragment key={i}>
-                <A.span className="inline-block" style={style}>
-                  {words[i]}
-                </A.span>
-                {i < words.length - 1 && " "}
-              </React.Fragment>
-            ))}
+            {useWordAnimation ? (
+              springs.map((style, i) => (
+                <React.Fragment key={i}>
+                  <A.span className="inline-block" style={style}>
+                    {words[i]}
+                  </A.span>
+                  {i < words.length - 1 && " "}
+                </React.Fragment>
+              ))
+            ) : (
+              paragraph
+            )}
           </p>
           <p className="mt-6 text-base sm:text-lg font-medium tracking-wide text-white/50">
-            Marcel  &amp; Mikołaj
+            {names ?? "Marcel  &amp; Mikołaj"}
           </p>
         </div>
       </div>

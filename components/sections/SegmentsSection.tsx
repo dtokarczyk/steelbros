@@ -52,8 +52,8 @@ const SegmentCard = ({
   subtitle,
   reverse = false,
 }: {
-  title: string;
-  subtitle: string;
+  title: React.ReactNode;
+  subtitle: React.ReactNode;
   reverse?: boolean;
 }) => {
   const ref = useRef<HTMLDivElement>(null);

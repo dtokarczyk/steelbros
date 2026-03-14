@@ -14,8 +14,8 @@ import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
 interface ProcessStep {
   number: string;
-  title: string;
-  description: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
   icon: IconDefinition;
 }
 

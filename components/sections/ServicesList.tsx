@@ -6,7 +6,7 @@ import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
 type ServiceCase = {
-  title: string;
+  title: React.ReactNode;
   imageSrc: string;
   imageAlt: string;
 };

@@ -5,12 +5,13 @@ import { useSpring, useTrail } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
 interface HeroSectionProps {
-  title: string;
-  lead?: string;
+  title: React.ReactNode;
+  lead?: React.ReactNode;
 }
 
 export default function HeroSection({ title, lead }: HeroSectionProps) {
-  const words = title.split(" ");
+  const titleIsString = typeof title === "string";
+  const words = titleIsString ? (title as string).split(" ") : [];
   const [triggered, setTriggered] = useState(false);
   const [scrollOpacity, setScrollOpacity] = useState(1);
   const [scrollY, setScrollY] = useState(0);
@@ -58,8 +59,16 @@ export default function HeroSection({ title, lead }: HeroSectionProps) {
     delay: 400,
   });
 
-  // Title words — staggered trail starting after label
+  // Title words — staggered trail starting after label (when title is string)
   const trail = useTrail(words.length, {
+    opacity: triggered ? 1 : 0,
+    y: triggered ? 0 : 14,
+    config: { mass: 1, tension: 160, friction: 26 },
+    delay: 650,
+  });
+
+  // Title as single block (when title is ReactNode)
+  const titleNodeSpring = useSpring({
     opacity: triggered ? 1 : 0,
     y: triggered ? 0 : 14,
     config: { mass: 1, tension: 160, friction: 26 },
@@ -118,17 +127,29 @@ export default function HeroSection({ title, lead }: HeroSectionProps) {
             className="mb-5 text-3xl font-semibold leading-tight text-white sm:text-4xl md:text-5xl lg:text-[3.25rem]"
             style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
           >
-            {trail.map((style, i) => (
-              <React.Fragment key={i}>
-                <A.span style={style} className="inline-block">
-                  {words[i]}
-                </A.span>
-                {i < words.length - 1 && " "}
-              </React.Fragment>
-            ))}
+            {titleIsString && words.length > 0 ? (
+              trail.map((style, i) => (
+                <React.Fragment key={i}>
+                  <A.span style={style} className="inline-block">
+                    {words[i]}
+                  </A.span>
+                  {i < words.length - 1 && " "}
+                </React.Fragment>
+              ))
+            ) : (
+              <A.span
+                style={{
+                  opacity: titleNodeSpring.opacity,
+                  transform: titleNodeSpring.y.to((y) => `translateY(${y}px)`),
+                }}
+                className="inline-block"
+              >
+                {title}
+              </A.span>
+            )}
           </h1>
 
-          {lead && (
+          {lead != null && (
             <A.p
               style={leadSpring}
               className="mx-auto max-w-2xl text-base leading-relaxed text-white/70 sm:text-lg"
