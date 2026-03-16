@@ -131,7 +131,7 @@ const SegmentsSection = ({ segments }: SegmentsSectionProps) => {
   const right = list.slice(3);
 
   return (
-    <section className="relative z-10 py-16 md:py-20 lg:py-24">
+    <section className="relative z-10 pb-16 md:pb-20 lg:pb-24">
       <div className="container">
         <div className="flex flex-col items-center justify-center gap-8 lg:flex-row">
           {/* Left column — image on the right */}

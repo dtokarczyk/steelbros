@@ -91,7 +91,7 @@ const KeywordsStrip = ({
   }, [direction, speed, api]);
 
   return (
-    <div className="border-y border-white/10 bg-background/80 py-4 text-foreground backdrop-blur-sm overflow-hidden">
+    <div className="border-y border-white/10 bg-background/80 py-2 md:py-4 text-foreground backdrop-blur-sm overflow-hidden">
       <A.div
         className="flex will-change-transform"
         style={{ x }}
@@ -102,7 +102,7 @@ const KeywordsStrip = ({
             {words.map((word) => (
               <span
                 key={word}
-                className="flex items-center gap-4 px-4 text-sm font-semibold uppercase tracking-[0.25em] opacity-70 whitespace-nowrap [font-variant:small-caps]"
+                className="flex items-center gap-2 px-2 md:gap-4 md:px-4 text-[10px] md:text-sm font-semibold uppercase tracking-[0.15em] md:tracking-[0.25em] opacity-70 whitespace-nowrap [font-variant:small-caps]"
               >
                 {word}
                 <span className="text-white/30 text-xs">{SEPARATOR}</span>

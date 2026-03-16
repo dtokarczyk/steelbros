@@ -29,7 +29,7 @@ const IntroSection = ({ label, paragraph, names }: IntroSectionProps) => {
   return (
     <section
       aria-labelledby="intro-heading"
-      className="relative z-10 py-16 md:py-24 lg:py-28"
+      className="relative z-10"
     >
       <div className="container">
         <div className="max-w-5xl mx-auto text-center">

@@ -187,7 +187,7 @@ const ServiceCard = ({
       style={springs}
       className="group flex flex-col overflow-hidden border border-white/10 bg-white/[0.03]"
     >
-      <div className="relative aspect-[1/1] w-full overflow-hidden">
+      <button type="button" onClick={onAskPrice} className="relative aspect-[1/1] w-full overflow-hidden cursor-pointer">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -195,7 +195,7 @@ const ServiceCard = ({
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
-      </div>
+      </button>
       <div className="flex flex-1 flex-col justify-between px-4 pb-4 pt-3">
         <p className="mb-3 text-base text-white sm:text-xl">
           {title}
@@ -246,6 +246,7 @@ const ServicesList = ({
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [consent, setConsent] = useState(false);
 
   const handleOpenModal = (serviceTitle: React.ReactNode) => {
     const titleText =
@@ -279,10 +280,10 @@ const ServicesList = ({
             <p className="mb-1 text-xs font-semibold uppercase tracking-[0.25em] text-white/50 [font-variant:small-caps]">
               {eyebrow}
             </p>
-            <h2 className="mb-2 text-2xl font-semibold text-white sm:text-3xl">
+            <h2 className="mb-2 text-2xl font-semibold text-white sm:text-4xl">
               {title}
             </h2>
-            <p className="text-sm leading-relaxed text-white/60 sm:text-base">
+            <p className="text-sm leading-relaxed text-white/60 sm:text-lg">
               {description}
             </p>
           </div>
@@ -301,14 +302,12 @@ const ServicesList = ({
 
       {isModalVisible && (
         <div
-          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4 transition-opacity duration-200 ${
-            isModalOpen ? "opacity-100" : "opacity-0"
-          }`}
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4 transition-opacity duration-200 ${isModalOpen ? "opacity-100" : "opacity-0"
+            }`}
         >
           <div
-            className={`w-full max-w-md rounded-xl bg-background p-6 shadow-xl transition-all duration-200 ${
-              isModalOpen ? "scale-100 translate-y-0" : "scale-95 translate-y-2"
-            }`}
+            className={`w-full max-w-md rounded-xl bg-background p-6 shadow-xl transition-all duration-200 ${isModalOpen ? "scale-100 translate-y-0" : "scale-95 translate-y-2"
+              }`}
           >
             <div className="mb-4 flex items-start justify-between gap-4">
               <div>
@@ -323,10 +322,10 @@ const ServicesList = ({
               <button
                 type="button"
                 onClick={handleCloseModal}
-                className="rounded-full p-1 text-white/60 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="rounded-full p-2.5 text-white/60 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                 aria-label="Zamknij okno"
               >
-                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
                   <path
                     d="M6 6l12 12M18 6L6 18"
                     fill="none"
@@ -393,9 +392,27 @@ const ServicesList = ({
                 />
               </div>
 
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+                  required
+                />
+                <span className="text-[11px] leading-relaxed text-white/50">
+                  Wyrażam zgodę na przetwarzanie moich danych osobowych przez
+                  SteelBros w celu odpowiedzi na zapytanie ofertowe, zgodnie z
+                  art.&nbsp;6 ust.&nbsp;1 lit.&nbsp;a Rozporządzenia Parlamentu
+                  Europejskiego i Rady (UE) 2016/679 (RODO). Zgoda jest
+                  dobrowolna i może być wycofana w dowolnym momencie.
+                </span>
+              </label>
+
               <button
                 type="submit"
-                className="mt-2 inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                disabled={!consent}
+                className="mt-2 inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:opacity-40 disabled:pointer-events-none"
               >
                 Wyślij
               </button>

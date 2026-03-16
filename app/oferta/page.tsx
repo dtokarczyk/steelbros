@@ -7,7 +7,7 @@ const introText =
 export default function ServicesPage() {
   return (
     <>
-      <div className="min-h-[50vh] flex flex-col justify-center">
+      <div className="min-h-[50vh] flex flex-col justify-end">
         <IntroSection label="Oferta" paragraph={introText} />
       </div>
 
