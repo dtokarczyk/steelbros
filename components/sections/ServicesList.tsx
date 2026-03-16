@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
+import Button from "@/components/Button";
 
 export type ServiceCase = {
   title: React.ReactNode;
@@ -147,9 +148,16 @@ function getScrollProgress(el: HTMLElement): number {
   return Math.min(Math.max(raw, 0), 1);
 }
 
-type ServiceCardProps = ServiceCase;
+type ServiceCardProps = ServiceCase & {
+  onAskPrice: () => void;
+};
 
-const ServiceCard = ({ title, imageSrc, imageAlt }: ServiceCardProps) => {
+const ServiceCard = ({
+  title,
+  imageSrc,
+  imageAlt,
+  onAskPrice,
+}: ServiceCardProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   const [springs, api] = useSpring(() => ({
@@ -188,10 +196,33 @@ const ServiceCard = ({ title, imageSrc, imageAlt }: ServiceCardProps) => {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
       </div>
-      <div className="px-4 pb-4 pt-3">
-        <p className="text-base font-semibold text-white sm:text-lg">
+      <div className="flex flex-1 flex-col justify-between px-4 pb-4 pt-3">
+        <p className="mb-3 text-base text-white sm:text-xl">
           {title}
         </p>
+        <Button
+          as="button"
+          type="button"
+          onClick={onAskPrice}
+          className="gap-2 px-4 py-2 text-[11px]"
+          variant="primary"
+        >
+          <span className="inline-flex h-4 w-4 items-center justify-center">
+            <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
+              <path
+                d="M7 6h14l-1.5 9h-13L5 4H2"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <circle cx="10" cy="19" r="1" fill="currentColor" />
+              <circle cx="17" cy="19" r="1" fill="currentColor" />
+            </svg>
+          </span>
+          <span>Zapytaj o cenę</span>
+        </Button>
       </div>
     </A.div>
   );
@@ -209,6 +240,37 @@ const ServicesList = ({
   description = DEFAULT_DESCRIPTION,
   services = defaultServiceCases,
 }: ServicesListProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const handleOpenModal = (serviceTitle: React.ReactNode) => {
+    const titleText =
+      typeof serviceTitle === "string" ? serviceTitle : "Wybrana usługa";
+    setSelectedService(titleText);
+    setIsModalVisible(true);
+    // Defer state change to ensure transition classes are applied
+    requestAnimationFrame(() => {
+      setIsModalOpen(true);
+    });
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    // Wait for animation to finish before unmounting
+    setTimeout(() => {
+      setIsModalVisible(false);
+    }, 200);
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    // Form submission logic to be implemented later
+  };
+
   return (
     <section id={id} className="bg-background py-16 md:py-20 lg:py-24">
       <div className="container px-4">
@@ -228,10 +290,119 @@ const ServicesList = ({
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
-            <ServiceCard key={`${service.imageSrc}-${index}`} {...service} />
+            <ServiceCard
+              key={`${service.imageSrc}-${index}`}
+              {...service}
+              onAskPrice={() => handleOpenModal(service.title)}
+            />
           ))}
         </div>
       </div>
+
+      {isModalVisible && (
+        <div
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm px-4 transition-opacity duration-200 ${
+            isModalOpen ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <div
+            className={`w-full max-w-md rounded-xl bg-background p-6 shadow-xl transition-all duration-200 ${
+              isModalOpen ? "scale-100 translate-y-0" : "scale-95 translate-y-2"
+            }`}
+          >
+            <div className="mb-4 flex items-start justify-between gap-4">
+              <div>
+                <h3 className="text-lg font-semibold text-white">
+                  Zapytaj o cenę
+                </h3>
+                <p className="mt-2 text-xs text-white/50">
+                  Skontaktujemy się z Tobą w ciągu 1 dnia roboczego, aby
+                  przedstawić ofertę dopasowaną do Twojego zapytania.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={handleCloseModal}
+                className="rounded-full p-1 text-white/60 transition hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                aria-label="Zamknij okno"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-4 w-4">
+                  <path
+                    d="M6 6l12 12M18 6L6 18"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="service-inquiry-name"
+                  className="text-sm font-medium text-white"
+                >
+                  Imię i nazwisko
+                </label>
+                <input
+                  id="service-inquiry-name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="w-full rounded-md border border-white/10 bg-transparent px-3 py-2 text-sm text-white outline-none ring-primary/30 placeholder:text-white/30 focus:border-primary focus:ring-2"
+                  placeholder="Wpisz swoje imię i nazwisko"
+                  autoComplete="name"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="service-inquiry-email"
+                  className="text-sm font-medium text-white"
+                >
+                  Adres e-mail
+                </label>
+                <input
+                  id="service-inquiry-email"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full rounded-md border border-white/10 bg-transparent px-3 py-2 text-sm text-white outline-none ring-primary/30 placeholder:text-white/30 focus:border-primary focus:ring-2"
+                  placeholder="Wpisz swój adres e-mail"
+                  autoComplete="email"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label
+                  htmlFor="service-inquiry-phone"
+                  className="text-sm font-medium text-white"
+                >
+                  Numer telefonu
+                </label>
+                <input
+                  id="service-inquiry-phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full rounded-md border border-white/10 bg-transparent px-3 py-2 text-sm text-white outline-none ring-primary/30 placeholder:text-white/30 focus:border-primary focus:ring-2"
+                  placeholder="Wpisz swój numer telefonu"
+                  autoComplete="tel"
+                />
+              </div>
+
+              <button
+                type="submit"
+                className="mt-2 inline-flex w-full items-center justify-center rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              >
+                Wyślij
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

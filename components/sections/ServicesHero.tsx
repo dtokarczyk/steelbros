@@ -85,53 +85,59 @@ export default function ServicesHero({
       className="bg-primary"
       style={{ backgroundColor: `rgb(${r}, ${g}, ${b})` }}
     >
-      <div className="container px-4">
-        <div className="pt-48 pb-8 sm:pt-64 sm:pb-20 lg:pt-48 lg:pb-24">
-          {/* Header + lead text on top (sticky on all screens) */}
-          <div className="max-w-4xl text-left sticky top-24">
-            {title != null &&
-              (titleIsString && words.length > 0 ? (
-                <AnimatedTitle words={words} triggered={triggered} />
-              ) : (
-                <h1
-                  className="text-5xl font-semibold leading-tight text-background sm:text-6xl md:text-7xl lg:text-8xl"
-                  style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
-                >
-                  <A.span
-                    style={{
-                      opacity: titleSpring.opacity,
-                      transform: titleSpring.y.to((y) => `translateY(${y}px)`),
-                      display: "inline-block",
-                    }}
+      {/* Text block: sticky, stays perfectly still */}
+      <div className="sticky top-0 z-0">
+        <div className="container px-4">
+          <div className="pt-48 pb-8 sm:pt-64 sm:pb-20 lg:pt-48 lg:pb-24">
+            <div className="max-w-4xl text-left">
+              {title != null &&
+                (titleIsString && words.length > 0 ? (
+                  <AnimatedTitle words={words} triggered={triggered} />
+                ) : (
+                  <h1
+                    className="text-5xl font-semibold leading-tight text-background sm:text-6xl md:text-7xl lg:text-8xl"
+                    style={{ fontFamily: '"Besley", "Times New Roman", serif' }}
                   >
-                    {title}
-                  </A.span>
-                </h1>
-              ))}
+                    <A.span
+                      style={{
+                        opacity: titleSpring.opacity,
+                        transform: titleSpring.y.to((y) => `translateY(${y}px)`),
+                        display: "inline-block",
+                      }}
+                    >
+                      {title}
+                    </A.span>
+                  </h1>
+                ))}
 
-            {subtitle != null && (
-              <A.p
-                style={{
-                  opacity: subtitleSpring.opacity,
-                  transform: subtitleSpring.y.to((y) => `translateY(${y}px)`),
-                  fontFamily: '"Besley", "Times New Roman", serif',
-                }}
-                className="mt-6 max-w-3xl text-xl leading-relaxed text-background sm:text-2xl md:text-3xl"
-              >
-                {subtitle}
-              </A.p>
-            )}
+              {subtitle != null && (
+                <A.p
+                  style={{
+                    opacity: subtitleSpring.opacity,
+                    transform: subtitleSpring.y.to((y) => `translateY(${y}px)`),
+                    fontFamily: '"Besley", "Times New Roman", serif',
+                  }}
+                  className="mt-6 max-w-3xl text-xl leading-relaxed text-background sm:text-2xl md:text-3xl"
+                >
+                  {subtitle}
+                </A.p>
+              )}
 
-            <div className="mt-6">
-              <Button as="a" href="#services-more" variant="dark">
-                Czytaj więcej
-              </Button>
+              <div className="mt-6">
+                <Button as="a" href="#services-more" variant="dark">
+                  Czytaj więcej
+                </Button>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
 
-          {/* Image in the middle – below text on mobile */}
+      {/* Image + caption: higher z-index, scrolls over the sticky text */}
+      <div className="relative z-10">
+        <div className="container px-4">
           {imageSrc && (
-            <div className="mt-10 relative overflow-hidden rounded-lg bg-black/5 aspect-[1/1] sm:aspect-[16/8]">
+            <div className="relative overflow-hidden rounded-lg bg-black/5 aspect-[1/1] sm:aspect-[16/8]">
               <Image
                 src={imageSrc}
                 alt={imageAlt ?? ""}
@@ -154,7 +160,6 @@ export default function ServicesHero({
               {caption}
             </A.p>
           )}
-
         </div>
       </div>
     </section>
