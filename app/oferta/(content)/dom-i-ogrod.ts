@@ -28,7 +28,7 @@ export const homeAndGardenContent: ServicePageContent = {
       },
       {
         title: "Grille stalowe stalowe",
-        imageSrc: "/images/grille-stalowe.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_steel_grill_grid_--ar_32_--raw_--v_7_2cb25204-8bd8-4f15-ba5a-6a7dc86a8fe5_1.png",
         imageAlt: "Stalowa grille ogrodowa"
       },
       {
@@ -38,37 +38,37 @@ export const homeAndGardenContent: ServicePageContent = {
       },
       {
         title: "Stojaki na drewno kominkowe",
-        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_steel_firewood_rack_--ar_32_--raw_--v_7_50d8bf07-199a-447d-aebc-e6ad5bebc10f_2.png",
         imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
       },
       {
         title: "Stojaki rowerowe",
-        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_steel_bike_rack_in_city_--ar_32_--raw_--stylize_2_dbe0f65d-f305-44e1-b983-266763327950_2.png",
         imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
       },
       {
         title: "Huśtawki ogrodowe stalowe",
-        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_Steel_garden_swings_--ar_32_--raw_--stylize_150_-_78b7f2e6-855b-43a3-b256-c791ce47b11d_1.png",
         imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
       },
       {
         title: "Altany stalowe",
-        imageSrc: "/images/konstrukcje-balkonow-tarasow.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_steel_garden_altana_--ar_32_--raw_--stylize_150_-_720b4080-b034-401e-9bd4-0683a5d0e053_1.png",
         imageAlt: "Stalowa konstrukcja balkonu ogrodowego"
       },
       {
         title: "Ogrodzenia panelowe",
-        imageSrc: "/images/ogrodzenia-panelowe.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_Panel_fences_steel_--ar_32_--raw_--stylize_150_--_bb2bd6cf-f14b-4eaf-9fad-772b815083d3_2.png",
         imageAlt: "Nowoczesne ogrodzenie panelowe z bramą przesuwną"
       },
       {
         title: "Bramy przesuwne automatyczne",
-        imageSrc: "/images/altany-zadaszenia.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_automatic_sliding_gates_--ar_32_--raw_--stylize_1_9f634cb2-3ba8-426e-be86-95a63aeea5fa_2.png",
         imageAlt: "Stalowa konstrukcja altany ogrodowej"
       },
       {
         title: "Zadaszenia nad drzwiami",
-        imageSrc: "/images/altany-zadaszenia.jpg",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_steel_roof_over_the_door_--ar_32_--raw_--stylize__47397bb7-5afd-4c06-9127-028193286c1d_1.png",
         imageAlt: "Stalowa konstrukcja altany ogrodowej"
       }
     ]

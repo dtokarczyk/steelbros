@@ -3,7 +3,8 @@ import { ServicePageContent } from "./types";
 export const modernInteriorsContent: ServicePageContent = {
   ServicesHero: {
     title: "Meble i konstrukcje loftowe",
-    subtitle: "Wprowadź industrialny charakter do swojego salonu, sypialni lub biura dzięki stalowym detalom."
+    subtitle: "Wprowadź industrialny charakter do swojego salonu, sypialni lub biura dzięki stalowym detalom.",
+    imageSrc: "/images/oferta/loftowe-wnetrza/u2844336958_loft_table_in_the_living_room_made_of_steel_--ar_32_cf099a02-7848-455a-b1f4-73b6c913e170.png",
   },
   TextSplitSection: {
     title: "Stal w nowoczesnych wnętrzach – design na miarę",
@@ -16,22 +17,22 @@ export const modernInteriorsContent: ServicePageContent = {
     services: [
       {
         title: "Regały i biblioteki stalowe",
-        imageSrc: "/images/regaly-loft.jpg",
+        imageSrc: "/images/oferta/loftowe-wnetrza/u2844336958_steel_bookcase_--ar_32_--raw_--stylize_150_--v_7_bc3969fa-fa08-4284-be70-e71f76f6ed76_3.png",
         imageAlt: "Regał loftowy ze stali i drewna"
       },
       {
         title: "Stelaże stołów i łóżek",
-        imageSrc: "/images/stelaze-stoly.jpg",
+        imageSrc: "/images/oferta/loftowe-wnetrza/u2844336958_steel_bed_frame_in_bedroom_--ar_32_--raw_--styliz_9ff1d65a-5f8f-4d57-acfb-7d8f5d671708_0.png",
         imageAlt: "Metalowe nogi do stołu dębowego"
       },
       {
         title: "Ścianki i przegrody loftowe",
-        imageSrc: "/images/scianki-loftowe.jpg",
+        imageSrc: "/images/oferta/loftowe-wnetrza/u2844336958_steel_partition_in_a_loft_bedroom_--ar_32_--raw_-_a12c60c1-55c8-4194-8cba-92b1a9e33008_3.png",
         imageAlt: "Przeszklona ścianka loftowa ze stali"
       },
       {
-        title: "Meble RTV i konsole",
-        imageSrc: "/images/konsole-rtv.jpg",
+        title: "Meble do salonu",
+        imageSrc: "/images/oferta/loftowe-wnetrza/u2844336958_steelwood_loft_TV_cabinet_--ar_32_--raw_--stylize_0d901e0b-ac92-42bc-94dd-3c98f7b4b42b_3.png",
         imageAlt: "Stalowa szafka pod telewizor w stylu industrialnym"
       }
     ]
