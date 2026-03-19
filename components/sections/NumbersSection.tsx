@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState, useCallback } from "react";
-import { useSpring } from "@react-spring/web";
+import { animated, useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
 interface Stat {
@@ -24,9 +24,9 @@ function AnimatedCounter({ value, suffix, visible }: { value: number; suffix: st
   });
 
   return (
-    <A.span className="tabular-nums">
+    <animated.span className="tabular-nums">
       {spring.val.to((v) => `${Math.round(v)}${suffix}`)}
-    </A.span>
+    </animated.span>
   );
 }
 
