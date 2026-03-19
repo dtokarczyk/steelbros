@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSpring } from "@react-spring/web";
 import { A } from "@/lib/animated";
 
@@ -104,11 +104,33 @@ const FaqSection = ({ title, faqs }: Partial<FaqSectionProps> = {}) => {
   const sectionTitle = title ?? DEFAULT_FAQ_TITLE;
   const sectionFaqs = faqs ?? defaultFaqs;
 
+  const faqJsonLd = useMemo(
+    () =>
+      JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: sectionFaqs.map((item) => ({
+          "@type": "Question",
+          name: item.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.answer,
+          },
+        })),
+      }),
+    [sectionFaqs],
+  );
+
   return (
     <section
       aria-labelledby="faq-heading"
       className="relative z-10 border-t border-white/10 bg-black/10 py-16 md:py-24 lg:py-28"
     >
+      <script
+        type="application/ld+json"
+        // JSON-LD for FAQ rich results; content is JSON-serialized from trusted props
+        dangerouslySetInnerHTML={{ __html: faqJsonLd }}
+      />
       <div className="container max-w-5xl">
         <header className="mb-12 text-left md:mb-16">
           <h2

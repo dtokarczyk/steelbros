@@ -1,8 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTrail } from "@react-spring/web";
 import { A } from "@/lib/animated";
+
+/** Scroll distance multiplier: lower = subtler lag vs page scroll. */
+const PARALLAX_SCROLL_FACTOR = 0.21;
 
 export interface IntroSectionProps {
   label?: React.ReactNode;
@@ -12,11 +15,41 @@ export interface IntroSectionProps {
 
 const IntroSection = ({ label, paragraph, names }: IntroSectionProps) => {
   const [triggered, setTriggered] = useState(false);
+  const parallaxLayerRef = useRef<HTMLDivElement>(null);
   const words = (paragraph ?? "").trim().split(/\s+/).filter(Boolean);
 
   useEffect(() => {
     const t = setTimeout(() => setTriggered(true), 100);
     return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const el = parallaxLayerRef.current;
+    if (!el) return;
+
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (mq.matches) return;
+
+    let rafId = 0;
+
+    const applyParallax = () => {
+      rafId = 0;
+      const y = window.scrollY * PARALLAX_SCROLL_FACTOR;
+      el.style.transform = `translate3d(0, ${y}px, 0)`;
+    };
+
+    const onScroll = () => {
+      if (rafId !== 0) return;
+      rafId = requestAnimationFrame(applyParallax);
+    };
+
+    applyParallax();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== 0) cancelAnimationFrame(rafId);
+      el.style.transform = "";
+    };
   }, []);
 
   const trail = useTrail(words.length, {
@@ -32,7 +65,10 @@ const IntroSection = ({ label, paragraph, names }: IntroSectionProps) => {
       className="relative z-10"
     >
       <div className="container">
-        <div className="max-w-5xl mx-auto text-center">
+        <div
+          ref={parallaxLayerRef}
+          className="max-w-5xl mx-auto text-center will-change-transform"
+        >
           <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-white/60 [font-variant:small-caps]">
             {label ?? "Intro"}
           </p>

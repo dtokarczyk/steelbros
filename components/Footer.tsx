@@ -5,7 +5,7 @@ const NAV_ITEMS = [
   { label: "O nas", href: "#about" },
   { label: "Oferta", href: "#segments" },
   { label: "Realizacje", href: "#realizacje" },
-  { label: "Kontakt", href: "#kontakt" },
+  { label: "Kontakt", href: "/kontakt" },
 ];
 
 const SOCIAL_LINKS = [

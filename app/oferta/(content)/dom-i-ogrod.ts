@@ -70,7 +70,12 @@ export const homeAndGardenContent: ServicePageContent = {
         title: "Zadaszenia nad drzwiami",
         imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_steel_roof_over_the_door_--ar_32_--raw_--stylize__47397bb7-5afd-4c06-9127-028193286c1d_1.png",
         imageAlt: "Stalowa konstrukcja altany ogrodowej"
-      }
+      },
+      {
+        title: "Huśtawki",
+        imageSrc: "/images/oferta/dom-i-ogrod/u2844336958_swing_steel_garden_--ar_32_--raw_--v_7_3dcf8dab-aba0-4a0d-bb7e-7a732f2afc0c.png",
+        imageAlt: "Nowoczesna ławka parkowa na osiedlu"
+      },
     ]
   },
   FaqSection: {
@@ -78,11 +83,27 @@ export const homeAndGardenContent: ServicePageContent = {
     faqs: [
       {
         question: "Jak zabezpieczacie elementy stalowe przed rdzą?",
-        answer: "Wszystkie nasze konstrukcje ogrodowe, z wyjątkiem naturalnie rdzewiejącego cortenu, poddajemy cynkowaniu ogniowemu oraz malowaniu proszkowemu. To gwarantuje wieloletnią ochronę przed warunkami atmosferycznymi."
+        answer: "Wszystkie nasze konstrukcje ogrodowe, z wyjątkiem naturalnie rdzewiejącego cortenu, poddajemy cynkowaniu ogniowemu oraz malowaniu proszkowemu. To zapewnia długotrwałą ochronę przed warunkami atmosferycznymi."
       },
       {
         question: "Czy mogę zamówić niestandardowy wymiar donicy lub paleniska?",
-        answer: "Oczywiście. Realizujemy zlecenia na wymiar. Nasi projektanci przygotują odpowiedni projekt dopasowany do wymiarów Twojego tarasu lub ogrodu."
+        answer: "Tak, realizujemy projekty na indywidualne zamówienie. Dopasowujemy wymiary, formę i wykończenie do konkretnej przestrzeni ogrodu lub tarasu."
+      },
+      {
+        question: "Z jakich materiałów wykonujecie elementy ogrodowe?",
+        answer: "Pracujemy głównie na stali czarnej, nierdzewnej oraz cortenie. Dobór materiału zależy od estetyki projektu oraz warunków, w jakich konstrukcja będzie użytkowana."
+      },
+      {
+        question: "Czy oferujecie montaż elementów ogrodowych na miejscu?",
+        answer: "Tak, w przypadku większych realizacji, takich jak altany, ogrodzenia czy bramy, zapewniamy transport i montaż u klienta."
+      },
+      {
+        question: "Czy konstrukcje wymagają regularnej konserwacji?",
+        answer: "Większość naszych produktów nie wymaga intensywnej konserwacji. Dzięki odpowiednim zabezpieczeniom wystarczy podstawowa pielęgnacja, np. czyszczenie. Wyjątkiem jest corten, który naturalnie patynuje."
+      },
+      {
+        question: "Czy pomagacie w doborze produktów do aranżacji ogrodu?",
+        answer: "Tak, doradzamy w wyborze rozwiązań dopasowanych do stylu ogrodu, dostępnej przestrzeni oraz budżetu. Możemy zaproponować spójne elementy, które stworzą funkcjonalną i estetyczną całość."
       }
     ]
   },

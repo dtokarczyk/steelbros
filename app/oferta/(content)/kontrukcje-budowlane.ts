@@ -63,11 +63,27 @@ export const buildingStructuresContent: ServicePageContent = {
     faqs: [
       {
         question: "Czy zajmujecie się także montażem garaży u klienta?",
-        answer: "Tak, oferujemy usługę kompleksową – od przygotowania konstrukcji w naszym warsztacie po jej profesjonalny montaż we wskazanym miejscu."
+        answer: "Tak, oferujemy usługę kompleksową – od przygotowania konstrukcji w naszym warsztacie po profesjonalny montaż we wskazanym miejscu."
       },
       {
         question: "Czy pomagacie dobrać odpowiednie profile do obciążenia antresoli?",
-        answer: "Zdecydowanie. Nasi fachowcy wyliczają odpowiednie przekroje profili, dbając o to, by antresola była w 100% sztywna i bezpieczna w użytkowaniu."
+        answer: "Tak. Dobieramy przekroje i rozwiązania konstrukcyjne do planowanego obciążenia oraz warunków technicznych, aby całość była stabilna i bezpieczna w codziennym użytkowaniu."
+      },
+      {
+        question: "Czy wykonujecie konstrukcje stalowe na indywidualny wymiar?",
+        answer: "Tak, realizujemy konstrukcje dopasowane do konkretnej inwestycji. Przygotowujemy rozwiązania pod wskazane wymiary, przeznaczenie obiektu i wymagania montażowe."
+      },
+      {
+        question: "Jakie obiekty wykonujecie w ramach konstrukcji budowlanych?",
+        answer: "Wykonujemy między innymi antresole, balkony, tarasy, garaże z płyty warstwowej, lekkie konstrukcje hal, stelaże pod fotowoltaikę oraz konstrukcje pod reklamy."
+      },
+      {
+        question: "Czy realizujecie konstrukcje dla klientów prywatnych i firm?",
+        answer: "Tak, obsługujemy zarówno klientów indywidualnych, jak i firmy. Dopasowujemy zakres prac do skali inwestycji – od pojedynczych konstrukcji po większe realizacje użytkowe."
+      },
+      {
+        question: "Czy mogę zamówić wycenę przed rozpoczęciem realizacji?",
+        answer: "Tak, przed rozpoczęciem prac przygotowujemy wstępną wycenę na podstawie zakresu realizacji, wymiarów, rodzaju konstrukcji i miejsca montażu."
       }
     ]
   },

@@ -47,6 +47,26 @@ export const modernInteriorsContent: ServicePageContent = {
       {
         question: "Czy wykonujecie ścianki loftowe ze szkłem?",
         answer: "Tak, zajmujemy się kompleksową realizacją ścianek loftowych i przegród. Wykonujemy stalową ramę i wyposażamy ją w bezpieczne szkło."
+      },
+      {
+        question: "Czy wykonujecie meble loftowe na indywidualne zamówienie?",
+        answer: "Tak, wszystkie nasze realizacje mogą być dopasowane do konkretnych wymiarów i potrzeb klienta. Tworzymy projekty od podstaw na bazie przesłanych wytycznych lub pomiarów."
+      },
+      {
+        question: "Jakie wykończenia stali są dostępne?",
+        answer: "Oferujemy różne warianty wykończenia, w tym malowanie proszkowe w dowolnym kolorze z palety RAL oraz surowe, industrialne wykończenia na życzenie klienta."
+      },
+      {
+        question: "Czy pomagacie w doborze mebli do stylu wnętrza?",
+        answer: "Tak, doradzamy w zakresie formy, proporcji i kolorystyki, aby meble idealnie komponowały się z przestrzenią i charakterem wnętrza."
+      },
+      {
+        question: "Czy realizujecie projekty dla biur i lokali komercyjnych?",
+        answer: "Tak, wykonujemy meble i konstrukcje loftowe zarówno do mieszkań, jak i przestrzeni biurowych, lokali usługowych czy restauracji."
+      },
+      {
+        question: "Ile trwa realizacja mebli loftowych?",
+        answer: "Czas realizacji zależy od stopnia skomplikowania projektu, ale zazwyczaj wynosi od kilku dni do kilku tygodni. Szczegóły ustalamy indywidualnie po analizie projektu."
       }
     ]
   },

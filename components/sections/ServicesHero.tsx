@@ -82,7 +82,7 @@ export default function ServicesHero({
   return (
     <section
       ref={sectionRef}
-      className="bg-primary"
+      className="bg-primary pb-16"
       style={{ backgroundColor: `rgb(${r}, ${g}, ${b})` }}
     >
       {/* Text block: sticky, stays perfectly still */}

@@ -4,7 +4,7 @@ import { modernInteriorsContent } from "./loftowe-wnetrza";
 import { industryContent } from "./dla-firm-przemyslu";
 import { buildingStructuresContent } from "./kontrukcje-budowlane";
 import { camperOffroadContent } from "./campery-off-road";
-import { urbanArchitectureContent } from "./mala-architektura-ogrodowa";
+import { urbanArchitectureContent } from "./mala-architektura-miejska";
 import { additionalServicesContent } from "./uslugi-dodatkowe";
 import type { ServicePageContent } from "./types";
 
@@ -14,7 +14,7 @@ export const pages: Record<string, ServicePageContent> = {
   "dla-firm-przemyslu": industryContent,
   "kontrukcje-budowlane": buildingStructuresContent,
   "campery-off-road": camperOffroadContent,
-  "mala-architektura-ogrodowa": urbanArchitectureContent,
+  "mala-architektura-miejska": urbanArchitectureContent,
   "uslugi-dodatkowe": additionalServicesContent,
 };
 
