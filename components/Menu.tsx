@@ -7,7 +7,7 @@ import { A } from "@/lib/animated";
 
 const NAV_ITEMS = [
   { label: "Strona główna", href: "/" },
-  { label: "O nas", href: "#about" },
+  { label: "O nas", href: "/o-nas" },
   { label: "Oferta", href: "/oferta" },
   { label: "Realizacje", href: "#realizacje" },
   { label: "Kontakt", href: "/kontakt" },

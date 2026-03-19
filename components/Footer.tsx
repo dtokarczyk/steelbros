@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const NAV_ITEMS = [
   { label: "Strona główna", href: "/" },
-  { label: "O nas", href: "#about" },
+  { label: "O nas", href: "/o-nas" },
   { label: "Oferta", href: "#segments" },
   { label: "Realizacje", href: "#realizacje" },
   { label: "Kontakt", href: "/kontakt" },
